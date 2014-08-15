@@ -15,18 +15,15 @@
 
 @import "../../../bower_components/bourbon/dist/bourbon";
 
-@include font-face('Avenir Next Regular', '../fonts/AvenirNextLTPro-Regular');
-@include font-face('Avenir Next Heavy', '../fonts/AvenirNextLTPro-Heavy');
-@include font-face('Avenir Next Demi', '../fonts/AvenirNextLTPro-Demi');
-@include font-face('Avenir Next Bold', '../fonts/AvenirNextLTPro-Bold');
+@include font-face('Nexa Black', '../fonts/Nexa-Black');
 
 $main-color: #4512C4;
 
 
 // Override theme settings (see ../template/settings.scss)
-$mainFont: 'Avenir Next Regular', 'Helvetica', sans-serif;
-$mainDemiFont: 'Avenir Next Demi', 'Helvetica', sans-serif;
-$mainBoldFont: 'Avenir Next Bold', 'Helvetica', sans-serif;
+$mainFont: 'Nexa Black', 'Helvetica', sans-serif;
+$mainDemiFont: 'Nexa Black', 'Helvetica', sans-serif;
+$mainBoldFont: 'Nexa Black', 'Helvetica', sans-serif;
 $mainColor: #000;
 
 $origamiColor: #3B5998;
@@ -36,8 +33,8 @@ $framerColor: #84D1FF;
 $framerColorAlt: #1E2229;
 
 $headingMargin: 0 0 20px 0;
-$headingFont: 'Avenir Next Heavy', Impact, sans-serif;
-$headingColor: #4512C4;
+$headingFont: 'Nexa Black', Impact, sans-serif;
+$headingColor: $mainColor;
 $headingLineHeight: 0.8em;
 $headingLetterSpacing: -0.002em;
 $headingLetterSpacingTitle: -0.03em;
@@ -61,9 +58,10 @@ $heading1TextShadow: none;
 }
 
 .reveal h1 {
-    font-size: 1.7em;
+    font-size: 4em;
     font-family: $headingFont;
     text-transform: $headingTextTransform;
+    letter-spacing: -1.5em;
 }
 .reveal h2 {
     font-size: 1.2em;

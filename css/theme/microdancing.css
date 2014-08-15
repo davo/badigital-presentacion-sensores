@@ -6,29 +6,11 @@
  * reveal.js is Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
 @font-face {
-  font-family: "Avenir Next Regular";
+  font-family: "Nexa Black";
   font-weight: normal;
   font-style: normal;
-  src: url("../fonts/AvenirNextLTPro-Regular.eot");
-  src: url("../fonts/AvenirNextLTPro-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/AvenirNextLTPro-Regular.woff") format("woff"), url("../fonts/AvenirNextLTPro-Regular.ttf") format("truetype"), url("../fonts/AvenirNextLTPro-Regular.svg#Avenir Next Regular") format("svg"); }
-@font-face {
-  font-family: "Avenir Next Heavy";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/AvenirNextLTPro-Heavy.eot");
-  src: url("../fonts/AvenirNextLTPro-Heavy.eot?#iefix") format("embedded-opentype"), url("../fonts/AvenirNextLTPro-Heavy.woff") format("woff"), url("../fonts/AvenirNextLTPro-Heavy.ttf") format("truetype"), url("../fonts/AvenirNextLTPro-Heavy.svg#Avenir Next Heavy") format("svg"); }
-@font-face {
-  font-family: "Avenir Next Demi";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/AvenirNextLTPro-Demi.eot");
-  src: url("../fonts/AvenirNextLTPro-Demi.eot?#iefix") format("embedded-opentype"), url("../fonts/AvenirNextLTPro-Demi.woff") format("woff"), url("../fonts/AvenirNextLTPro-Demi.ttf") format("truetype"), url("../fonts/AvenirNextLTPro-Demi.svg#Avenir Next Demi") format("svg"); }
-@font-face {
-  font-family: "Avenir Next Bold";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../fonts/AvenirNextLTPro-Bold.eot");
-  src: url("../fonts/AvenirNextLTPro-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/AvenirNextLTPro-Bold.woff") format("woff"), url("../fonts/AvenirNextLTPro-Bold.ttf") format("truetype"), url("../fonts/AvenirNextLTPro-Bold.svg#Avenir Next Bold") format("svg"); }
+  src: url("../fonts/Nexa-Black.eot");
+  src: url("../fonts/Nexa-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Black.woff") format("woff"), url("../fonts/Nexa-Black.ttf") format("truetype"), url("../fonts/Nexa-Black.svg#Nexa Black") format("svg"); }
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -36,24 +18,25 @@
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #4512c4;
+  color: black;
   line-height: 0.8em;
   letter-spacing: -0.002em;
   text-shadow: none; }
 
 .reveal h1 {
-  font-size: 1.7em;
-  font-family: "Avenir Next Heavy", Impact, sans-serif;
-  text-transform: uppercase; }
+  font-size: 4em;
+  font-family: "Nexa Black", Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -1.5em; }
 
 .reveal h2 {
   font-size: 1.2em;
-  font-family: "Avenir Next Bold", "Helvetica", sans-serif;
+  font-family: "Nexa Black", "Helvetica", sans-serif;
   letter-spacing: -0.03em !important; }
 
 .reveal h3 {
   font-size: .6em;
-  font-family: "Avenir Next Demi", "Helvetica", sans-serif;
+  font-family: "Nexa Black", "Helvetica", sans-serif;
   padding-top: 20px; }
 
 .window {
@@ -172,7 +155,7 @@ body {
   background-color: white; }
 
 .reveal {
-  font-family: "Avenir Next Regular", "Helvetica", sans-serif;
+  font-family: "Nexa Black", "Helvetica", sans-serif;
   font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
@@ -193,8 +176,8 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #4512c4;
-  font-family: "Avenir Next Heavy", Impact, sans-serif;
+  color: black;
+  font-family: "Nexa Black", Impact, sans-serif;
   line-height: 0.8em;
   letter-spacing: -0.002em;
   text-transform: uppercase;

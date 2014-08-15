@@ -1,0 +1,3 @@
+[submodule "captura-osc"]
+	path = captura-osc
+	url = https://github.com/gcba/captura-osc

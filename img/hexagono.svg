@@ -3,52 +3,18 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 450 450" enable-background="new 0 0 450 450" xml:space="preserve">
-<g id="edificio" display="none">
-	
-		<polyline display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" points="
-		225,305 257.5,284.5 354.3,285 	"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="354.3" y1="285" x2="354.3" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="354.3" y1="545" x2="224.3" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="224.3" y1="545" x2="224.3" y2="305"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="354.3" y1="285" x2="420" y2="245"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="420" y1="505" x2="420" y2="245"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="420" y1="505" x2="354.3" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="420" y1="245" x2="322.7" y2="245"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="322.7" y1="245" x2="257.5" y2="284.5"/>
-</g>
-<g id="mini-edificio" display="none">
-	
-		<polyline display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-		29.8,425 61.8,385 126.8,385 	"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="126.8" y1="385" x2="126.8" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="126.8" y1="545" x2="29.8" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="29.8" y1="545" x2="29.8" y2="425"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="126.8" y1="385" x2="160.3" y2="365"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="160.3" y1="525" x2="160.3" y2="365"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="160.3" y1="525" x2="126.8" y2="545"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="160.3" y1="365" x2="95.3" y2="365"/>
-	
-		<line display="inline" fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-miterlimit="10" x1="95.3" y1="365" x2="61.8" y2="385"/>
-</g>
-<polyline fill="none" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	62.5,125 224,25 387.5,125 387.5,325 224,425 62.5,325 62.5,225 "/>
-<polyline fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	321.7,365 322.5,165 224,225 224,425 "/>
-<polygon fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
-	289,265 257.5,285 257.5,245 289,225 "/>
+
+<path
+   style="fill:none;stroke:#ffffff;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+   d="M 62.5,125 224,25 387.5,125 387.5,325 224,425 62.5,325 l 0,-100"
+   id="polyline3075" />
+<path
+   style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+   d="m 321.7,365 0.8,-200 -98.5,60 0,200"
+   id="polyline3077" />
+<path
+   style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+   d="m 289,265 -31.5,20 0,-40 31.5,-20 z"
+   id="polygon3079" />
+   
 </svg>

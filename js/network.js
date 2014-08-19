@@ -1,4 +1,4 @@
-var reset = false;
+var canceloFondo = true;
 
 function Network() {
 
@@ -10,9 +10,9 @@ function Network() {
         node_layer = new Layer();
 
         // Create nodes
-        for (var i = 0; i < node_count && !reset; i += 1) {
+        for (var i = 0; i < node_count && canceloFondo; i += 1) {
+            console.log ('--->' , i < node_count && canceloFondo);
             setTimeout(this.add_node, 150 * i);
-            console.log(reset);
         }
 
         // Set drawing loop
@@ -119,7 +119,7 @@ function Node() {
         x = random_int(-offset, view.size.width + offset),
         y = random_int(-offset, view.size.height + offset);
 
-    this.path           = new Path.Circle({ center: [0, 0], radius: random_int(2, radius)});
+    this.path           = new Path.Circle({ center: [0, 0], radius: random_int(1, radius)});
     this.location       = new Point(x, y);
     this.velocity       = new Point(Math.random() * 10, Math.random() * 50);
     this.acceleration   = new Point(Math.random() * 20, Math.random() * 20);
@@ -131,10 +131,11 @@ function Node() {
         if (typeof x !== 'undefined' && typeof y !== 'undefined') {
             this.location = new Point(x, y);
         }
+            
 
+
+        // this.path.opacity = Math.random() * .9;
         this.path.style = node_style;
-
-        // this.path.style =
 
         // Create edges to every other node
         for (i = 0; i < nodes.length; i += 1) {
@@ -195,7 +196,7 @@ function Node() {
 
     this.wander = function () {
         var wanderR     = 5,
-            wanderD     = 50,
+            wanderD     = 30,
             change      = 0.1,
             circleLocation,
             circleOffset,
@@ -241,10 +242,10 @@ var distance = function (x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
-var radius = 5,
-    max_length = 150,
-    node_count = 500,
-    offset = 200,
+var radius = 7,
+    max_length = 300,
+    node_count = 100,
+    offset = 100,
     nodes = [],
     node_layer,
     node_style = {
@@ -252,7 +253,7 @@ var radius = 5,
     },
     edge_style = {
         strokeColor: '#fff',
-        strokeWidth: 1.5
+        strokeWidth: 1.2
     },
     edges = [],
     edge_layer;

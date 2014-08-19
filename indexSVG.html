@@ -1,56 +1,56 @@
 <!doctype html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
-    <title>Buenos Aires Data, Sensores, API y Datos Abiertos en Tiempo Real</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/microdancing.css">
-
+    <title>SVG Ejemplo</title>
     <script src='lib/js/TweenMax.min.js' type="text/javascript" charset="utf-8"></script>
 </head>
 
-<body>
-    <div id="animation">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 450" enable-background="new 0 0 450 450" xml:space="preserve">
+<body bgcolor="black">
+<div style="text-align: center;">
 
-            <path style="fill:none;stroke:#ffffff;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="M 62.5,125 224,25 387.5,125 387.5,325 224,425 62.5,325 l 0,-100" id="polyline3075" />
-            <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 321.7,365 0.8,-200 -98.5,60 0,200" id="polyline3077" />
-            <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 289,265 -31.5,20 0,-40 31.5,-20 z" id="polygon3079" />
+    <svg version="1.1" id="casita" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 450" enable-background="new 0 0 450 450" xml:space="preserve" width="450px" height="450px">
+        <path style="fill:none;stroke:#ffffff;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="M 62.5,125 224,25 387.5,125 387.5,325 224,425 62.5,325 l 0,-100" id="hexagono" />
+        <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 321.7,365 0.8,-200 -98.5,60 0,200" id="puerta" />
+        <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 289,265 -31.5,20 0,-40 31.5,-20 z" id="ventana" />
+    </svg>
 
-        </svg>
-    </div>
+	<div>
+	    <button onClick="javascript:animarPath('#hexagono');">Hexágono</button>
+	    <button onClick="javascript:animarPath('#puerta');">Puerta</button>
+	    <button onClick="javascript:animarPath('#ventana');">Ventana</button>
+	    <button onClick="javascript:animarPath('#hexagono');animarPath('#puerta');animarPath('#ventana');">Los 3</button>
+	</div>
+
+</div>
 
 
     <script>
 
-    var a = document.getElementById("animation");
-    var NS="http://www.w3.org/2000/svg";
-    var Animation = new TimelineMax();
-    Animation.pause();
-    var thisGroup = a.getElementsByTagNameNS(NS,"path");
-    var svgDoc = a.getElementsByTagNameNS(NS,"svg")[0];
-    svgDoc.style.visibility = "visible";
-    for(var x = 0; x<thisGroup.length;x++){
-        var line = thisGroup[x];
-        var dims = line.getTotalLength();
-        var linearea = dims
-        var strokeWidth = (line.getAttribute("stroke-width") == null)?3:line.getAttribute("stroke-width");
-        line.style.strokeDasharray = (linearea)+" "+(linearea);
-        line.style.strokeDashoffset = ((/Firefox/i.test(navigator.userAgent))? linearea/strokeWidth : linearea);
-        Animation.add(TweenMax.to(line.style,2,{strokeDashoffset:0,ease:Power2.easeInOut,onUpdate:function(){
-            var n = document.createTextNode(' ');
-            document.body.appendChild(n);
-            document.body.removeChild(n);
-        }}),(x>0)?"-=0.9":"");
-    }
-    Animation.play();
-    </script>
+		/*
+		 * Para pasar el svg a path seguir estos pasos:  
+		 *
+		 * 1 - Abrir el SVG en inkscape
+		 * 2 - Seleccionar todos los objetos (ctrl-a)
+	  	 * 3 - Seleccionar "path ->  object to path" o "Trayecto -> Objeto a Trajecto"  (shift-ctrl-c)
+	  	 * 4 - guardar el svg y ver las propiedades del path
+	  	 *
+		 */
+
+		// Anima el SVG
+		// @param: Sting (ID del path a animar)
+	    function animarPath (idPath){
+	    	var orig = document.querySelector(idPath), length;
+			var obj = {length:0, pathLength:orig.getTotalLength()};
+			var t = TweenMax.to(obj, 1, {length:obj.pathLength, onUpdate:drawLine, onUpdateParams:[orig,obj], ease:Linear.easeNone})
+	    }
+
+	    //callback de update del SVG
+		function drawLine(or,ob) {
+		  or.style.strokeDasharray = [ob.length,ob.pathLength].join(' ');
+		}
+
+   </script>
 
 </body>
 

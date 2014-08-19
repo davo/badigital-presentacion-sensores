@@ -26,4 +26,11 @@
 		<polyline fill="none" stroke="#00F7EA" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="
 		72.5,107.5 72.5,167.5 137.5,167.5 137.5,87.5 72.5,87.5 	"/>
 </g>
+<circle fill="#FFFFFF" cx="202" cy="188" r="7.5"/>
+<circle fill="#FFFFFF" cx="202" cy="67" r="7.5"/>
+<circle fill="#FFFFFF" cx="105" cy="8" r="7.5"/>
+<circle fill="#FFFFFF" cx="7" cy="68" r="7.5"/>
+<circle fill="#FFFFFF" cx="7" cy="108" r="7.5"/>
+<circle fill="#FFFFFF" cx="7" cy="187" r="7.5"/>
+<circle fill="#FFFFFF" cx="103" cy="248" r="7.5"/>
 </svg>

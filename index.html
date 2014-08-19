@@ -25,6 +25,11 @@
 
 	<body>
 		<div id="creative-content"></div>
+		<div id="posicion">
+			<div class="numero">01</div>
+			<div class="separador parte-uno"></div>
+			<div class="leyenda">Internet de las cosas</div>
+		</div>
 
 		<div class="reveal">
 
@@ -103,15 +108,13 @@
 
 		
 
-		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 		<script src="js/network.js"></script>
 
 
 		<script>
 		var pusheoNodos = true;
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+
 			Reveal.initialize({
 				controls: false,
 				progress: false,
@@ -120,7 +123,7 @@
 				width: 1200,
 
 				theme: 'microdancing', // available themes are in /css/theme
-				transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
@@ -139,11 +142,13 @@
 				]
 			});
 
-			var
-			content = $('.open-data h1'),
-			tl,contentSplit = new SplitText(content, {type:"words"}),
-			creative = $('#creative-content'),
-			tl = new TimelineMax({paused:true,autoRemoveChildren: true});
+			var content, contentSplit, creative, tl;
+
+			content = $('.open-data h1');
+			contentSplit = new SplitText(content, {type:"words"});
+			creative = $('#creative-content');
+
+			tl = new TimelineMax({paused:true});
 
 			TweenLite.set(content, {perspective:500});
 			tl.add("Open Data Titulo")
@@ -166,32 +171,8 @@
 
 			// callback para borrar los nodos una vez que termina el tween
 			function borroNodos(){
-				node_layer.removeChildren();
-				edge_layer.removeChildren();
-
-/// SVG ANIMATION
- var svgContainer = document.getElementById("animation");
- var nS="http://www.w3.org/2000/svg";
- var animation = new TimelineMax();
- animation.pause();
- var svgPaths = a.getElementsByTagNameNS(nS,"path");
- for(var x = 0; x<svgPaths.length;x++){
- 	alert("ansnd");
- var path = svgPaths[x];
- var pathDimensions = path.getTotalLength();
- var strokeWidth = path.getAttribute("stroke-width");
- path.style.strokeDasharray = (pathDimensions)+" "+(pathDimensions);
- path.style.strokeDashoffset = (/Firefox/i.test(navigator.userAgent))? pathDimensions/strokeWidth : pathDimensions;
- animation.add(TweenMax.to(path.style,1,{strokeDashoffset:0,onUpdate:function(){
- var n = document.createTextNode(' ');
- document.body.appendChild(n);
- document.body.removeChild(n);
- }}),(x>0)?"-=0.8":"");
- }
- animation.play();
-
-
-
+				// node_layer.removeChildren();
+				// edge_layer.removeChildren();
 			}
 
 		</script>

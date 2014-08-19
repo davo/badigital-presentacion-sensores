@@ -11,6 +11,36 @@
   font-style: normal;
   src: url("../fonts/Nexa-Black.eot");
   src: url("../fonts/Nexa-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Black.woff") format("woff"), url("../fonts/Nexa-Black.ttf") format("truetype"), url("../fonts/Nexa-Black.svg#Nexa Black") format("svg"); }
+@font-face {
+  font-family: "Nexa Bold";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nexa-Bold.eot");
+  src: url("../fonts/Nexa-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Bold.woff") format("woff"), url("../fonts/Nexa-Bold.ttf") format("truetype"), url("../fonts/Nexa-Bold.svg#Nexa Bold") format("svg"); }
+@font-face {
+  font-family: "Nexa Book";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nexa-Book.eot");
+  src: url("../fonts/Nexa-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Book.woff") format("woff"), url("../fonts/Nexa-Book.ttf") format("truetype"), url("../fonts/Nexa-Book.svg#Nexa Book") format("svg"); }
+@font-face {
+  font-family: "Nexa Heavy";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nexa-Heavy.eot");
+  src: url("../fonts/Nexa-Heavy.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Heavy.woff") format("woff"), url("../fonts/Nexa-Heavy.ttf") format("truetype"), url("../fonts/Nexa-Heavy.svg#Nexa Heavy") format("svg"); }
+@font-face {
+  font-family: "Nexa Light";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nexa-Light.eot");
+  src: url("../fonts/Nexa-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Light.woff") format("woff"), url("../fonts/Nexa-Light.ttf") format("truetype"), url("../fonts/Nexa-Light.svg#Nexa Light") format("svg"); }
+@font-face {
+  font-family: "Nexa Regular";
+  font-weight: normal;
+  font-style: normal;
+  src: url("../fonts/Nexa-Regular.eot");
+  src: url("../fonts/Nexa-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Nexa-Regular.woff") format("woff"), url("../fonts/Nexa-Regular.ttf") format("truetype"), url("../fonts/Nexa-Regular.svg#Nexa Regular") format("svg"); }
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -32,12 +62,12 @@
 
 .reveal h2 {
   font-size: 1.2em;
-  font-family: "Nexa Black", "Helvetica", sans-serif;
+  font-family: "Nexa Bold", "Helvetica", sans-serif;
   letter-spacing: -0.03em !important; }
 
 .reveal h3 {
   font-size: .6em;
-  font-family: "Nexa Black", "Helvetica", sans-serif;
+  font-family: "Nexa Book", "Helvetica", sans-serif;
   padding-top: 20px; }
 
 .window {
@@ -156,7 +186,7 @@ body {
   background-color: #30164e; }
 
 .reveal {
-  font-family: "Nexa Black", "Helvetica", sans-serif;
+  font-family: "Nexa Regular", "Helvetica", sans-serif;
   font-size: 36px;
   font-weight: normal;
   letter-spacing: -0.02em;
@@ -282,6 +312,31 @@ body {
   width: 100%;
   height: 100%;
   position: absolute; }
+
+#posicion {
+  position: absolute;
+  bottom: 30px;
+  right: 0;
+  color: white; }
+  #posicion .numero {
+    text-align: center;
+    font-family: "Nexa Light", "Helvetica", sans-serif;
+    font-size: 4.8em;
+    padding-right: 15px;
+    padding-bottom: 10px; }
+  #posicion .separador {
+    display: block;
+    width: 180px; }
+    #posicion .separador.parte-uno {
+      border-top: 5px solid #7c00ff; }
+  #posicion .leyenda {
+    font-family: "Nexa Heavy", "Helvetica", sans-serif;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 70%;
+    margin: 0 auto;
+    display: block; }
 
 .reveal section img {
   margin: 0px;

@@ -24,10 +24,11 @@
   text-shadow: none; }
 
 .reveal h1 {
-  font-size: 4em;
+  font-size: 2em;
   font-family: "Nexa Black", Impact, sans-serif;
   text-transform: uppercase;
-  letter-spacing: -1.5em; }
+  letter-spacing: -1.5em;
+  text-align: left; }
 
 .reveal h2 {
   font-size: 1.2em;
@@ -151,8 +152,8 @@
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: black;
-  background-color: black; }
+  background: #30164e;
+  background-color: #30164e; }
 
 .reveal {
   font-family: "Nexa Black", "Helvetica", sans-serif;

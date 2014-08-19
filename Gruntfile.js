@@ -76,23 +76,11 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
-		zip: {
-			'reveal-js-presentation.zip': [
-				'index.html',
-				'css/**',
-				'js/**',
-				'lib/**',
-				'images/**',
-				'plugin/**'
-			]
-		},
-
 		watch: {
-			// main: {
-			// 	files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
-			// 	tasks: 'default'
-			// },
+			main: {
+				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
+				tasks: 'default'
+			},
 			theme: {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
 				tasks: 'themes'
@@ -112,7 +100,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-zip' );
 
 	// Default task
-	grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify', 'qunit' ] );
+	grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify'] );
 
 	// Theme task
 	grunt.registerTask( 'themes', [ 'sass' ] );

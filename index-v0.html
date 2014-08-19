@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Buenos Aires Data, Sensores, API y Datos Abiertos en Tiempo Real</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/microdancing.css">
+		<script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script><script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script>
+		<script src='captura-osc/frontend/libs/paper-full.js' type="text/javascript" charset="utf-8"></script>
+		<script src='js/guild/GLDSpringKit.js' type="text/javascript" charset="utf-8"></script>
+		<script src='js/guild/GLDCountBeacon.js' type="text/javascript" charset="utf-8"></script>
+		<script type="text/paperscript" canvas="creative-content">
+			var springManager;
+			var countBeacon;
+			var dotSymbol;
+			var dotRedSymbol;
+			var dotsGroup;
+			var linesGroup;
+			var dots = [];
+			var lines = [];
+			var wh;
+			var hh;
+			var isKillAll;
+			var killdeCount = 0;
+			var draggingNode;
+			var draggingSpring;
+			var nearestNode;
+
+			function setup() {
+			    springManager = new GLDSpringManager();
+			    countBeacon = new GLDCountBeacon(10, beacon);
+			    var a = new Path.Circle(new Point(0, 0), 1);
+			    a.fillColor = "white";
+			    dotSymbol = new Symbol(a);
+			    a = new Path.Circle(new Point(0, 0), 1);
+			    a.fillColor = "grey";
+			    dotRedSymbol = new Symbol(a);
+			    linesGroup = new Group();
+			    dotsGroup = new Group();
+			    reset()
+			}
+
+			function reset() {
+			    removeAll();
+			    countBeacon.reset();
+			    killedCount = 0;
+			    wh = view.size.width * 0.5;
+			    hh = view.size.height * 0.5;
+			    isKillAll = false;
+			    springManager.minX = 0;
+			    springManager.minY = 0;
+			    springManager.maxX = view.size.width;
+			    springManager.maxY = view.size.height;
+			    springManager.gravity = 0;
+			    dots = [];
+			    lines = []
+			}
+
+			function removeAll() {
+			    for (var c = 0; c < lines.length; c++) {
+			        var a = lines[c];
+			        springManager.removeSpring(a.spring);
+			        if (a.path) {
+			            a.path.remove()
+			        }
+			    }
+			    lines = [];
+			    for (var c = 0; c < dots.length; c++) {
+			        var b = dots[c];
+			        springManager.removeNode(b.node);
+			        if (b.path) {
+			            b.path.remove()
+			        }
+			    }
+			    dots = []
+			}
+
+			function onMouseDown(a) {
+			    if (draggingNode) {
+			        onMouseUp(a)
+			    }
+			    nearestNode = springManager.nearestNode(a.point.x, a.point.y);
+			    draggingNode = new GLDSpringNode(a.point.x, a.point.y);
+			    draggingNode.isFixed = true;
+			    springManager.addNode(draggingNode);
+			    console.log(nearestNode, draggingNode);
+			    draggingSpring = new GLDSpring(draggingNode, nearestNode, 0);
+			    springManager.addSpring(draggingSpring)
+			}
+
+			function onMouseUp(a) {
+			    if (draggingNode) {
+			        springManager.removeSpring(draggingSpring);
+			        springManager.removeNode(draggingNode);
+			        draggingNode = undefined;
+			        nearestNode = undefined;
+			        draggingSpring = undefined
+			    }
+			}
+
+			function onMouseDrag(a) {
+			    if (draggingNode) {
+			        draggingNode.x = a.point.x;
+			        draggingNode.y = a.point.y
+			    }
+			}
+
+			function onFrame(b) {
+			    var d = new Date().getTime();
+			    countBeacon.update();
+			    compulsion();
+			    springManager.update();
+			    for (var a = 0; a < dots.length; a++) {
+			        dots[a].update()
+			    }
+			    for (var a = 0; a < lines.length; a++) {
+			        lines[a].update()
+			    }
+			    var c = new Date().getTime();
+			    if (c - d > 15 && isKillAll == false) {
+			        killAll()
+			    }
+			    if (killedCount == dots.length && dots.length > 1) {
+			        reset()
+			    }
+			}
+
+			function compulsion() {
+			    for (var e = 0; e < dots.length; e++) {
+			        for (var d = e + 1; d < dots.length; d++) {
+			            var a = dots[e].node;
+			            var k = dots[d].node;
+			            var l = k.x - a.x;
+			            var h = k.y - a.y;
+			            var g = l * l + h * h;
+			            if (g > 1 && g < 40000) {
+			                var f = Math.atan2(h, l);
+			                var c = Math.cos(f) * 20 / g;
+			                var b = Math.sin(f) * 20 / g;
+			                a.fx -= c;
+			                a.fy -= b;
+			                k.fx += c;
+			                k.fy += b
+			            }
+			        }
+			    }
+			}
+
+			function onResize(a) {
+			    reset()
+			}
+
+			function beacon() {
+			    if (isKillAll) {
+			        return
+			    }
+			    var f;
+			    var h;
+			    if (dots.length == 0) {
+			        h = new Point(view.size.width * 0.5, view.size.height * 0.5);
+			        f = new Dot(h);
+			        f.maxConnection = 5;
+			        springManager.addNode(f.node);
+			        dots.push(f)
+			    } else {
+			        var d = getNodeForConnection();
+			        if (d) {
+			            h = new Point(d.node.x, d.node.y);
+			            var a = Math.random() * 360 * Math.PI / 180;
+			            h += new Point(Math.cos(a) * d.radius, Math.sin(a) * d.radius);
+			            f = new Dot(h);
+			            f.generation = d.generation + 1;
+			            springManager.addNode(f.node);
+			            dots.push(f);
+			            var c = new Line(d, f);
+			            var g = new GLDSpring(d.node, f.node, 50);
+			            springManager.addSpring(g);
+			            c.spring = g;
+			            lines.push(c);
+			            d.connectionCount++;
+			            d.redCount = 1;
+			            d.scaleV += 4;
+			            f.connectionCount++;
+			            var e = wh - f.node.x;
+			            var b = hh - f.node.y;
+			            var a = Math.atan2(b, e)
+			        }
+			    }
+			}
+
+			function getNodeForConnection() {
+			    for (var b = 0; b < 20; b++) {
+			        var a = dots[Math.floor(Math.random() * dots.length)];
+			        if (a.connectionCount < a.maxConnection) {
+			            return a
+			        }
+			    }
+			    return
+			}
+
+			function killAll() {
+			    isKillAll = true;
+			    for (var b = 0; b < dots.length; b++) {
+			        var c = dots[b];
+			        c.killDelay = 2 + Math.floor(Math.random() * 20);
+			        c.killFlag = true
+			    }
+			    for (var b = 0; b < lines.length; b++) {
+			        var a = lines[b];
+			        a.killFlag = true
+			    }
+			}
+
+			function removeDot(c) {
+			    reset();
+			    console.log("kill");
+			    return;
+			    var f = objectIndexForArray(c, dots);
+			    var b = [];
+			    for (var e = 0; e < lines.length; e++) {
+			        var a = lines[e];
+			        if (a.spring.node0 == c.node || a.spring.node1 == c.node) {
+			            b.push(a)
+			        }
+			    }
+			    for (var e = 0; e < b.length; e++) {
+			        var a = b[e];
+			        var d = objectIndexForArray(a, lines);
+			        springManager.removeSpring(a.spring);
+			        a.teardown();
+			        lines.splice(d, 1)
+			    }
+			    c.teardown();
+			    springManager.removeNode(c.node);
+			    dots.splice(f, 1)
+			}
+
+			function removeSubDot(d) {
+			    var c = [];
+			    for (var e = 0; e < lines.length; e++) {
+			        var b = lines[e];
+			        if (b.spring.node0 == d.node || b.spring.node1 == d.node) {
+			            c.push(b)
+			        }
+			    }
+			    for (var e = 0; e < c.length; e++) {
+			        var b = c[e];
+			        var a;
+			        var f;
+			        if (b.node0 == d) {
+			            a = b.node0;
+			            f = b.node1
+			        } else {
+			            a = b.node1;
+			            f = b.node0
+			        } if (f && f.generation > a.generation) {
+			            removeDot(f)
+			        }
+			    }
+			}
+
+			function objectIndexForArray(c, a) {
+			    for (var b = 0; b < a.length; b++) {
+			        if (a[b] == c) {
+			            return b
+			        }
+			    }
+			    return -1
+			}
+			var Camera = function() {
+			    this.fixedPositionNode;
+			    this.positionNode;
+			    this.tscaling = 4;
+			    this.scaling = 1;
+			    this.scalingV = 0;
+			    this.scalingF = 0
+			};
+			Camera.prototype.update = function() {
+			    this.scalingF = (this.tscaling - this.scaling) * 0.01;
+			    this.scalingV += this.scalingF;
+			    this.scalingV *= 0.9;
+			    this.scaling += this.scalingV;
+			    if (this.scaling < 0.1) {
+			        this.scaling = 0.1
+			    }
+			};
+			var Dot = function(a) {
+			    this.node = new GLDSpringNode(a.x, a.y, false);
+			    this.node.deccel = .5;
+			    this.maxConnection = Math.floor(Math.pow(Math.random() * 3, 2) + 1) + 1;
+			    this.connectionCount = 0;
+			    this.radius = this.maxConnection * 2;
+			    this.tscaling = 1;
+			    this.scaling = 1;
+			    this.scalingV = 8;
+			    this.scalingF = 0;
+			    this.redCount = 1;
+			    this.generation;
+			    this.killDelay = 1;
+			    this.killFlag = false;
+			    this.killCompleteFlag = false
+			};
+			Dot.prototype.update = function() {
+			    if (this.path) {
+			        this.path.remove()
+			    }
+			    if (this.killFlag && this.killDelay == 0) {
+			        this.tscaling = 0.01;
+			        this.scalingV = Math.random() * 16;
+			        this.killDelay = -1
+			    } else {
+			        if (this.killFlag && this.killDelay < 0) {
+			            this.tscaling = 0.001;
+			            if (this.killCompleteFlag == false && this.scaling < 0.01) {
+			                this.killCompleteFlag = true;
+			                killedCount++
+			            }
+			        } else {
+			            this.tscaling = this.connectionCount;
+			            if (this.killFlag == true) {
+			                this.killDelay--
+			            }
+			        }
+			    }
+			    this.scalingF = (this.tscaling - this.scaling) * 0.05;
+			    this.scalingV += this.scalingF;
+			    this.scalingV *= 0.8;
+			    this.scaling += this.scalingV;
+			    this.redCount *= 0.75;
+			    this.path = (this.redCount > 0.1) ? dotRedSymbol.place() : dotSymbol.place();
+			    this.path.position = new Point(this.node.x, this.node.y);
+			    this.path.scaling = this.scaling;
+			    dotsGroup.addChild(this.path)
+			};
+			Dot.prototype.teardown = function() {
+			    this.path.remove()
+			};
+			var Line = function(b, a) {
+			    this.dot0 = b;
+			    this.dot1 = a;
+			    this.spring;
+			    this.path = new Path.Line(new Point(0, 0), new Point(0, 0));
+			    this.path.closed = false;
+			    this.killFlag = false;
+			    this.update()
+			};
+			Line.prototype.update = function() {
+			    if (this.path) {
+			        this.path.remove()
+			    }
+			    if (this.dot0.path && this.dot1.path) {
+			        this.path = new Path.Line(this.dot0.path.position, this.dot1.path.position);
+			        this.path.strokeColor = new Color(0.85, 0.85, 0.85);
+			        this.path.closed = false;
+			        linesGroup.addChild(this.path);
+			        if (this.killFlag) {
+			            this.path.visible = false
+			        }
+			    }
+			};
+			Line.prototype.teardown = function() {
+			    console.log("teardown");
+			    this.path.remove()
+			};
+			setup();
+		</script>
+		<script src='lib/js/TweenMax.min.js' type="text/javascript" charset="utf-8"></script>
+		<script src='lib/js/SplitText.min.js' type="text/javascript" charset="utf-8"></script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<canvas id="creative-content"></canvas>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section class="open-data title">
+					<h1>882 días de Gobierno Abierto</h1>
+				</section>
+				<section>
+					<div class="title quote">BA Data 1.0</div >
+				</section>
+				<section>
+					<div class="title quote">Empujando la iniciativa</div >
+				</section>
+				<section>
+					<div class="title quote">Comunidad</div >
+				</section>
+
+				<section>Comunidad</section>
+				<section>BA Hackaton</section>
+				<section>
+					<section>BA Apps</section>
+					<section>Estacionapp</section>
+				</section>
+				<section>Mapa Interactivo</section>
+				<section>Store de Aplicaciones de Gobierno</section>
+
+				<section>
+					<section>DAL</section>
+					<section>DONDE</section>
+				</section>
+				<section>Gobcamp</section>
+				<section>Laboratorio</section>
+				<section>
+					<section>En el mundo</section>
+					<section>Portales de Datos</section>
+					<section>OGP</section>
+					<section>Code for America</section>
+					<section>OKFN</section>
+				</section>
+
+				<section>De adentro y de afuera.</section>
+				<section>Siguiente paso</section>
+
+				<section>Internet de las cosas</section>
+				<section>Qué es?</section>
+				<section>
+					<section>Ejemplos</section>
+					<section>IFTTT</section>
+					<section>Glowcaps</section>
+					<section>BiKN</section>
+				</section>
+
+				<section>
+					<section>Beneficios</section>
+					<section>Eficiencia y mejores servicios</section>
+					<section>Respuesta a emergencias</section>
+					<section>Desarrollo Economico</section>
+				</section>
+
+				<section>Ecosistema</section>
+				<section>Oportunidad</section>
+				<section>Cómo empezamos?</section>
+				<section>Datos Abiertos en tiempo real</section>
+				<section>API v0</section>
+				<section>Sensores</section>
+				<section>Primeras Visualizaciones</section>
+				<section>BA Dashboard</section>
+				<section>Gracias</section>
+
+				
+			</div>
+
+		</div>
+
+		
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				width: 1200,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					// { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					// { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					// { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					// { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					// { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					// { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+			  //       { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+
+				]
+			});
+			
+
+
+			var
+			content = $(".open-data h1"),
+			tl,contentSplit = new SplitText(content, {type:"lines"}),
+			tl = new TimelineMax({paused:true});
+
+			TweenLite.set(content, {perspective:500});
+			tl.add("Open Data Titulo")
+			tl.staggerFrom(contentSplit.lines, 0.6, {opacity:0, rotationX:-90, transformOrigin:"50% top -250"}, 0.1)
+
+
+
+			Reveal.addEventListener( 'ready', function( event ) {
+			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+			  	// setTimeout(function(){
+			  	// 	tl.play();
+			  	// }, 3000);
+
+				
+			} );
+
+		</script>
+
+	</body>
+</html>

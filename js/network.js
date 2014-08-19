@@ -2,7 +2,7 @@ var canceloFondo = true;
 
 function Network() {
 
-    this.init = function () {
+    this.init = function() {
         paper.install(window);
         paper.setup('canvas');
 
@@ -11,7 +11,6 @@ function Network() {
 
         // Create nodes
         for (var i = 0; i < node_count && canceloFondo; i += 1) {
-            console.log ('--->' , i < node_count && canceloFondo);
             setTimeout(this.add_node, 150 * i);
         }
 
@@ -19,13 +18,20 @@ function Network() {
         view.onFrame = this.draw;
     };
 
-    this.draw = function () {
+    this.draw = function() {
+
+
         var i;
 
         edge_layer.removeChildren();
 
+
+
         for (i = 0; i < edges.length; i += 1) {
-            edges[i].update();
+            if (pusheoNodos) {
+
+                edges[i].update();
+            }
         }
 
         for (i = 0; i < nodes.length; i += 1) {
@@ -35,60 +41,27 @@ function Network() {
         }
     };
 
-    // this.remove = function () {
-    //     var i;
-
-    //     // edge_layer.removeChildren();
-
-    //     for (i = 0; i < edges.length; i += 1) {
-    //         edges[i].remove();
-    //     }
-
-    //     for (i = 0; i < nodes.length; i += 1) {
-    //         nodes[i].remove();
-    //     }
-    // };
-
-    this.add_node = function (x, y) {
+    this.add_node = function(x, y) {
         var node = new Node();
         node.init(x, y);
-        nodes.push(node);
-        console.log(nodes.length);
+        if (pusheoNodos) {
+            nodes.push(node);
+        }
     };
 
-    // this.update_node = function () {
-    //     // console.log('Dude');
-    //     var node = new Node();
-    //     nodes.update();
-    // };
-
-    this.removeAll = function () {
-        // var i;
-
+    this.removeAll = function() {
+        var i;
         edge_layer.removeChildren();
-        node_layer.removeChildren();
-
-        console.log('lalala');
-
-        // for (i = 0; i < edges.length; i += 1) {
-        //     edges[i].update();
-        // }
-
-        // for (i = 0; i < nodes.length; i += 1) {
-        //     nodes[i].wander();
-        //     nodes[i].update();
-        //     nodes[i].checkBounds();
-        // }
     }
 };
 
 function Edge() {
-    this.init = function (node1, node2) {
+    this.init = function(node1, node2) {
         this.start = node1;
         this.end = node2;
     };
 
-    this.update = function () {
+    this.update = function() {
         var length = distance(this.start.location.x, this.start.location.y, this.end.location.x, this.end.location.y),
             line;
 
@@ -102,7 +75,7 @@ function Edge() {
         }
     };
 
-    this.remove = function () {
+    this.remove = function() {
         edge_layer.removeChildren();
     };
 };
@@ -110,21 +83,24 @@ function Edge() {
 function Node() {
     project.activeLayer = node_layer;
 
-    var maxSpeed        = Math.random() * 0.5 + 0.5,
-        maxForce        = 0.1,
-        angle           = Math.random() * 90,
-        wrapAngle       = (Math.PI / 2) + angle,
-        wanderTheta     = 0,
+    var maxSpeed = Math.random() * 0.5 + 0.5,
+        maxForce = 0.1,
+        angle = Math.random() * 90,
+        wrapAngle = (Math.PI / 2) + angle,
+        wanderTheta = 0,
         lastLocation,
         x = random_int(-offset, view.size.width + offset),
         y = random_int(-offset, view.size.height + offset);
 
-    this.path           = new Path.Circle({ center: [0, 0], radius: random_int(1, radius)});
-    this.location       = new Point(x, y);
-    this.velocity       = new Point(Math.random() * 10, Math.random() * 50);
-    this.acceleration   = new Point(Math.random() * 20, Math.random() * 20);
+    this.path = new Path.Circle({
+        center: [0, 0],
+        radius: random_int(2, radius)
+    });
+    this.location = new Point(x, y);
+    this.velocity = new Point(Math.random() * 10, Math.random() * 50);
+    this.acceleration = new Point(Math.random() * 20, Math.random() * 20);
 
-    this.init = function (x, y) {
+    this.init = function(x, y) {
         var i,
             edge;
 
@@ -145,12 +121,11 @@ function Node() {
         }
     };
 
-    this.remove = function () {
+    this.remove = function() {
         node_layer.removeChildren();
-        console.log('This should delete all the nodes.');
     };
 
-    this.update = function () {
+    this.update = function() {
         lastLocation = this.location.clone();
 
         this.velocity.x += this.acceleration.x;
@@ -162,12 +137,11 @@ function Node() {
 
         this.acceleration.length = 0;
 
-
         // Change node path position, without this it won't move
         this.path.position = this.location.clone();
     };
 
-    this.steer = function (target, slowdown) {
+    this.steer = function(target, slowdown) {
         var steer,
             desired = new Point(target.x - this.location.x, target.y - this.location.y),
             dist = desired.length;
@@ -188,16 +162,16 @@ function Node() {
         return steer;
     };
 
-    this.seek = function (target) {
+    this.seek = function(target) {
         var steer = this.steer(target, false);
         this.acceleration.x += steer.x;
         this.acceleration.y += steer.y;
     };
 
-    this.wander = function () {
-        var wanderR     = 5,
-            wanderD     = 30,
-            change      = 0.1,
+    this.wander = function() {
+        var wanderR = 5,
+            wanderD = 50,
+            change = 0.1,
             circleLocation,
             circleOffset,
             target;
@@ -218,7 +192,7 @@ function Node() {
         this.seek(target);
     };
 
-    this.checkBounds = function () {
+    this.checkBounds = function() {
         if (this.location.x < -offset) {
             this.location.x = view.size.width + offset;
         }
@@ -234,11 +208,11 @@ function Node() {
     };
 };
 
-var random_int = function (min, max) {
+var random_int = function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-var distance = function (x1, y1, x2, y2) {
+var distance = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
@@ -258,15 +232,11 @@ var radius = 7,
     edges = [],
     edge_layer;
 
-$(document).ready(function () {
+var network = new Network();
 
-    });
 window.onload = function() {
     var container = $('#creative-content'),
-    canvas = $('<canvas id="canvas" resize></canvas>').appendTo(container);
-    // window_height = $(window).outerHeight();
-    var network = new Network();
-        network.init();
+        canvas = $('<canvas id="canvas" resize></canvas>').appendTo(container);
+    network.init();
 
-    // console.log(nodes.length)
 }

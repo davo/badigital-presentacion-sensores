@@ -13,7 +13,7 @@
 
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/microdancing.css">
-		<script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script><script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script>
+		<script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script>
 		<script src='captura-osc/frontend/libs/paper-full.js' type="text/javascript" charset="utf-8"></script>
 		<script src='lib/js/TweenMax.min.js' type="text/javascript" charset="utf-8"></script>
 		<script src='lib/js/SplitText.min.js' type="text/javascript" charset="utf-8"></script>
@@ -28,13 +28,14 @@
 
 		<div class="reveal">
 
-			<div class="slides" style="visibility: hidden;">
+			<div class="slides">
 				<section class="open-data title">
 					<h1>882 días de Gobierno Abierto</h1>
 					<h2></h2>
 				</section>
 				<section data-state="second">
-					<div class="title quote">BA Data 1.0</div >
+					<div class="title quote">BA Data 1.0</div>
+
 				</section>
 				<section>
 					<div class="title quote">Empujando la iniciativa</div >
@@ -108,7 +109,7 @@
 
 
 		<script>
-
+		var pusheoNodos = true;
 			// Full list of configuration options available here:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -146,31 +147,52 @@
 
 			TweenLite.set(content, {perspective:500});
 			tl.add("Open Data Titulo")
-			tl.to(creative,0.4,{opacity:0.7,onUpdate:updateNode});
+			tl.to(creative,0.4,{opacity:0.7});
 			tl.staggerFrom(contentSplit.words, 0.75, {scale:.5,opacity:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.1);
 			tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
 
-			
-			function updateNode() {
-				console.log('Print on update');
-			};
-
 			Reveal.addEventListener( 'ready', function( event ) {
 			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+			 	TweenLite.to(creative,0.4,{opacity:1});
 			  	setTimeout(function(){
 			  		tl.play();
 			  	}, 3000);
-			 Reveal.addEventListener('second', function ( event ) {
-			 	TweenLite.to(creative,0.4,{opacity:0});
-			 	console.log(canceloFondo);
-			 	// var network = new Network();
-			 	// network.removeAll();
+			
+			 Reveal.addEventListener('second', function (event) {
+				pusheoNodos = false;
+			 	TweenLite.to(creative,0.4,{opacity:0, onComplete:borroNodos} );
 			 }, false);
+			});
+
+			// callback para borrar los nodos una vez que termina el tween
+			function borroNodos(){
+				node_layer.removeChildren();
+				edge_layer.removeChildren();
+
+/// SVG ANIMATION
+ var svgContainer = document.getElementById("animation");
+ var nS="http://www.w3.org/2000/svg";
+ var animation = new TimelineMax();
+ animation.pause();
+ var svgPaths = a.getElementsByTagNameNS(nS,"path");
+ for(var x = 0; x<svgPaths.length;x++){
+ 	alert("ansnd");
+ var path = svgPaths[x];
+ var pathDimensions = path.getTotalLength();
+ var strokeWidth = path.getAttribute("stroke-width");
+ path.style.strokeDasharray = (pathDimensions)+" "+(pathDimensions);
+ path.style.strokeDashoffset = (/Firefox/i.test(navigator.userAgent))? pathDimensions/strokeWidth : pathDimensions;
+ animation.add(TweenMax.to(path.style,1,{strokeDashoffset:0,onUpdate:function(){
+ var n = document.createTextNode(' ');
+ document.body.appendChild(n);
+ document.body.removeChild(n);
+ }}),(x>0)?"-=0.8":"");
+ }
+ animation.play();
 
 
 
-				
-			} );
+			}
 
 		</script>
 

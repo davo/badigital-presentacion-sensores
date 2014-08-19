@@ -159,11 +159,15 @@
 			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
 			  	setTimeout(function(){
 			  		tl.play();
-			  		// network.removeAll();
 			  	}, 3000);
-			 Reveal.addEventListener('second', function (event) {
+			 Reveal.addEventListener('second', function ( event) {
 			 	TweenLite.to(creative,0.4,{opacity:0});
+			 	reset = true;
+			 	console.log(reset);
+			 	// var network = new Network();
+			 	// network.removeAll();
 			 }, false);
+
 
 
 				

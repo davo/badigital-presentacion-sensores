@@ -1,3 +1,5 @@
+var reset = false;
+
 function Network() {
 
     this.init = function () {
@@ -8,8 +10,9 @@ function Network() {
         node_layer = new Layer();
 
         // Create nodes
-        for (var i = 0; i < node_count; i += 1) {
-            setTimeout(this.add_node, 50 * i);
+        for (var i = 0; i < node_count && !reset; i += 1) {
+            setTimeout(this.add_node, 150 * i);
+            console.log(reset);
         }
 
         // Set drawing loop
@@ -50,7 +53,7 @@ function Network() {
         var node = new Node();
         node.init(x, y);
         nodes.push(node);
-        console.log(nodes.length)
+        console.log(nodes.length);
     };
 
     // this.update_node = function () {
@@ -60,9 +63,12 @@ function Network() {
     // };
 
     this.removeAll = function () {
-        var i;
+        // var i;
 
         edge_layer.removeChildren();
+        node_layer.removeChildren();
+
+        console.log('lalala');
 
         // for (i = 0; i < edges.length; i += 1) {
         //     edges[i].update();
@@ -237,7 +243,7 @@ var distance = function (x1, y1, x2, y2) {
 
 var radius = 5,
     max_length = 150,
-    node_count = 150,
+    node_count = 500,
     offset = 200,
     nodes = [],
     node_layer,

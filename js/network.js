@@ -1,3 +1,5 @@
+var canceloFondo = true;
+
 function Network() {
 
     this.init = function() {
@@ -8,8 +10,8 @@ function Network() {
         node_layer = new Layer();
 
         // Create nodes
-        for (var i = 0; i < node_count; i += 1) {
-            setTimeout(this.add_node, 50 * i);
+        for (var i = 0; i < node_count && canceloFondo; i += 1) {
+            setTimeout(this.add_node, 150 * i);
         }
 
         // Set drawing loop
@@ -105,10 +107,11 @@ function Node() {
         if (typeof x !== 'undefined' && typeof y !== 'undefined') {
             this.location = new Point(x, y);
         }
+            
 
+
+        // this.path.opacity = Math.random() * .9;
         this.path.style = node_style;
-
-        // this.path.style =
 
         // Create edges to every other node
         for (i = 0; i < nodes.length; i += 1) {
@@ -213,10 +216,10 @@ var distance = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
-var radius = 5,
-    max_length = 150,
-    node_count = 150,
-    offset = 200,
+var radius = 7,
+    max_length = 300,
+    node_count = 100,
+    offset = 100,
     nodes = [],
     node_layer,
     node_style = {
@@ -224,7 +227,7 @@ var radius = 5,
     },
     edge_style = {
         strokeColor: '#fff',
-        strokeWidth: 1.5
+        strokeWidth: 1.2
     },
     edges = [],
     edge_layer;

@@ -34,17 +34,19 @@
 		<div class="reveal">
 
 			<div class="slides">
-				<section class="open-data">
+				<section class="inicio">
+				</section>
+				<section class="open-data" data-state="open-data">
 					<div class="icono" id="open-data"></div>
 					<div class="contenido">
 						<h1>882 días de Gobierno Abierto</h1>
 					</div>
 				</section>
-				<section data-state="segundo">
+				<section class="ba-data" data-state="ba-data">
+					<div class="icono" id="open-data"></div>
 					<div class="contenido">
 						<h1>BA Data 1.0</h1>
 					</div>
-
 				</section>
 				<section>
 					<div class="title quote">Empujando la iniciativa</div >
@@ -167,46 +169,63 @@
 				animarPath('#flusk-top','#open-data-svg');
 			}
 
-			var content, contentSplit, creative, tl, icono, master;
+			var contentOpenData, contentSplit, contentBASplit, creative, tl, icono, master;
 
-			master = new TimelineMax();
-			master.eventCallback("onComplete", function() {
-			});
+			
 
 			creative = $('#creative-content');
-			content = $('.open-data h1');
-			contentSplit = new SplitText(content, {type:"words"});
+			contentOpenData = $('.open-data h1');
+			contentSplit = new SplitText(contentOpenData, {type:"words"});
+			contentBAData = $('.ba-data h1');
+			contentBASplit = new SplitText(contentBAData, {type:"words"});
 			icono = $('#open-data');
-			
 
-			
 
-			TweenLite.set(content, {perspective:700});
+			TweenLite.set(contentOpenData, {perspective:70});
 
 			function resumeTimeline(seconds) {
 			    TweenLite.delayedCall(seconds, this.resume, null, this);
 			}
-			function openData() {
-				tl = new TimelineLite({paused:true});
-				tl.add("OpenData")
-				tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
-				tl.addPause(0.5, resumeTimeline, [5]);
-				tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
-				tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
 
-				// tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
+			tl = new TimelineMax({paused:true});
+			tl.eventCallback("onComplete", function() {
 
-			}
+			});
+
+			tl.add("OpenData")
+			tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
+			tl.addPause(0.5, resumeTimeline, [5]);
+			tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
+			tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
+			
+			
+			
+
+			
+
+			
+			// function openData(status) {
+			// 	tl = new TimelineLite({paused:status});
+			// 	tl.add("OpenData")
+			// 	tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
+			// 	tl.addPause(0.5, resumeTimeline, [5]);
+			// 	tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
+			// 	tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
+			// 	tl.addPause();
+			// 	tl.add("BAData")
+
+			// 	// tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
+
+			// }
 
 			Reveal.addEventListener( 'ready', function( event ) {
 
-			  	master.add(openData());
+			  	
 
 			}, false);
 
-			Reveal.addEventListener('segundo', function (event) {
-				// pusheoNodos = false;
-			 	// TweenLite.to(creative,0.4,{opacity:0, onComplete:borroNodos} );
+			Reveal.addEventListener('open-data', function (event) {
+				tl.play();
 			 }, false);
 			
 			 

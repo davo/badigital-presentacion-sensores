@@ -60,22 +60,17 @@ function animaSVG(param) {
 }
 
 function animarIcono() {
-    animaSVG('#open-data svg');
+    animaSVG('#sec001 svg');
 }
 
 var contentOpenData, contentSplit, contentBASplit, creative, tl, icono;
 
 creative = $('#creative-content');
+
 contentOpenData = $('h1');
 contentSplit = new SplitText(contentOpenData, {
     type: "words"
 });
-
-contentBAData = $('.ba-data h1');
-contentBASplit = new SplitText(contentBAData, {
-    type: "words"
-});
-
 
 
 TweenLite.set(contentOpenData, {
@@ -86,14 +81,19 @@ function resumeTimeline(seconds) {
     TweenLite.delayedCall(seconds, this.resume, null, this);
 }
 
-Reveal.addEventListener('ready', function(event) {
 
+Reveal.addEventListener('sec001', function(event) {
+	animoSeccion ();
 }, false);
 
-Reveal.addEventListener('open-data', function(event) {
-	icono = $('#open-data');
 
-    tl = new TimelineMax();
+
+
+
+
+function animoSeccion (){
+	icono = $('#sec001');
+    var tl = new TimelineMax();
 
     tl.add("OpenData")
     tl.to(creative, 0.4, {
@@ -114,4 +114,4 @@ Reveal.addEventListener('open-data', function(event) {
         transformOrigin: "50% top -250",
         ease: Power1.easeInOut
     }, 0.05);
-}, false);
+}

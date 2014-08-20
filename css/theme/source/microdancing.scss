@@ -67,7 +67,7 @@ $heading1TextShadow: none;
 .reveal h1 {
     font-size: 2em;
     font-family: $headingFont;
-    text-transform: $headingTextTransform;
+    text-transform: none !important;
     letter-spacing: -1.5em;
     text-align: left;
 }
@@ -80,26 +80,6 @@ $heading1TextShadow: none;
     font-size: .6em;
     font-family: $DemiFont;
     padding-top: 20px; 
-}
-
-.window {
-    // Overide sobre efectos de reveal sobre parent.
-
-    border: 1px solid #FC790D !important;
-    margin: 20px auto !important;
-    // padding: 80px 10px 20px 10px !important;
-    width: 600px;
-    height: 300px;
-    position: relative;
-
-    @include border-top-radius(15px);
-    @include border-bottom-radius(15px);
-    @include border-left-radius(15px);
-    @include border-right-radius(15px);
-
-    h1 {
-        margin-top: 135px !important;
-    }
 }
 
 

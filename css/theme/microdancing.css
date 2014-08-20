@@ -56,7 +56,7 @@
 .reveal h1 {
   font-size: 2em;
   font-family: "Nexa Black", Impact, sans-serif;
-  text-transform: uppercase;
+  text-transform: none !important;
   letter-spacing: -1.5em;
   text-align: left; }
 
@@ -69,23 +69,6 @@
   font-size: .6em;
   font-family: "Nexa Book", "Helvetica", sans-serif;
   padding-top: 20px; }
-
-.window {
-  border: 1px solid #FC790D !important;
-  margin: 20px auto !important;
-  width: 600px;
-  height: 300px;
-  position: relative;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px; }
-  .window h1 {
-    margin-top: 135px !important; }
 
 .decorator {
   position: absolute; }

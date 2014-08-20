@@ -11,7 +11,7 @@ function Network() {
 
         // Create nodes
         for (var i = 0; i < node_count && canceloFondo; i += 1) {
-            setTimeout(this.add_node, 150 * i);
+            setTimeout(this.add_node, 250 * i);
         }
 
         // Set drawing loop
@@ -26,7 +26,6 @@ function Network() {
         edge_layer.removeChildren();
 
 
-
         for (i = 0; i < edges.length; i += 1) {
             if (pusheoNodos) {
 
@@ -35,9 +34,13 @@ function Network() {
         }
 
         for (i = 0; i < nodes.length; i += 1) {
-            nodes[i].wander();
-            nodes[i].update();
-            nodes[i].checkBounds();
+            
+            if (pusheoNodos) {
+                nodes[i].wander();
+                nodes[i].update();
+                nodes[i].checkBounds();
+            }
+
         }
     };
 
@@ -217,8 +220,8 @@ var distance = function(x1, y1, x2, y2) {
 };
 
 var radius = 7,
-    max_length = 300,
-    node_count = 100,
+    max_length = 200,
+    node_count = 90,
     offset = 100,
     nodes = [],
     node_layer,

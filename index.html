@@ -40,16 +40,13 @@
 				
 
 				<section>
+					<div class="icono" id="open-data"></div>
 					<h1 class="titulo">882 días</h1>
+
 					<ul class="lista-diamante">
 					    <li class="item">
 					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
-					        </article>
-					    </li>
-					    <li class="item">
-					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
+					            <img src="img/slide-01-1.jpg" />
 					        </article>
 					    </li>
 					</ul>
@@ -60,12 +57,12 @@
 					<ul class="lista-diamante">
 					    <li class="item">
 					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
+					            <img src="img/slide-02-1.jpg" />
 					        </article>
 					    </li>
 					    <li class="item">
 					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
+					            <img src="img/slide-02-2.jpg" />
 					        </article>
 					    </li>
 					</ul>
@@ -76,12 +73,12 @@
 					<ul class="lista-diamante">
 					    <li class="item">
 					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
+					            <img src="img/slide-03-2.jpg" />
 					        </article>
 					    </li>
 					    <li class="item">
 					        <article class="contenidos">
-					            <img src="http://lorempixel.com/550/550/city/" />
+					            <img src="img/slide-03-4.jpg" />
 					        </article>
 					    </li>
 					</ul>
@@ -329,16 +326,23 @@
 					 	Trabajando colaborativamente cómo utilizar los datos generados por estos sensores podremos crear infinitas nuevas posibilidades.</aside> 
 				</section>
 				<section>
-					<h1 class="titulo main">Datos en tiempo real</h1> 
+					<h1 class="titulo main">Generar datos en tiempo real<br></h1> 
 				</section>
 				<section>
-					<h1 class="titulo">Un prototipo de sensores autónomos</h1>
+					<h1 class="titulo">Prototipo de sensor autónomo</h1>
 				</section>	
 				<section>
 					<h1 class="titulo">Dashboard con datos en tiempo real</h1>
+				</section>	
+				<section>
+					<h1 class="titulo main">Proyecto de todos</h1>
 				</section>
 				<section>
-					<h1 class="titulo">Muchas Gracias</h1>
+					<h1 class="titulo quote">Muchas Gracias</h1>
+					<ul>
+						<li class="social twitter">@LABgcba</li>
+						<li class="social facebook">/LABgcba</li>
+					</ul>
 				</section>
 
 
@@ -351,6 +355,7 @@
 
 		<script src="js/reveal.min.js"></script>
 		<script src="js/network.js"></script>
+		<script src="js/iconos.js"></script>
 		
 
 
@@ -409,24 +414,25 @@
 
 			
 
-			// creative = $('#creative-content');
+			creative = $('#creative-content');
 			// contentOpenData = $('.open-data h1');
 			// contentSplit = new SplitText(contentOpenData, {type:"words"});
 			// contentBAData = $('.ba-data h1');
 			// contentBASplit = new SplitText(contentBAData, {type:"words"});
-			// icono = $('#open-data');
+			// 
+			icono = $('#open-data');
 
 
-			// TweenLite.set(contentOpenData, {perspective:70});
+			TweenLite.set(contentOpenData, {perspective:70});
 
-			// function resumeTimeline(seconds) {
-			//     TweenLite.delayedCall(seconds, this.resume, null, this);
-			// }
+			function resumeTimeline(seconds) {
+			    TweenLite.delayedCall(seconds, this.resume, null, this);
+			}
 
-			// tl = new TimelineMax({paused:true});
-			// tl.eventCallback("onComplete", function() {
-
-			// });
+			tl = new TimelineMax({paused:true});
+			tl.eventCallback("onComplete", function() {
+				console.log('message');
+			});
 
 			// tl.add("OpenData")
 			// tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});

@@ -220,8 +220,8 @@ var distance = function(x1, y1, x2, y2) {
 };
 
 var radius = 7,
-    max_length = 200,
-    node_count = 200,
+    max_length = 50,
+    node_count = 100,
     offset = 100,
     nodes = [],
     node_layer,

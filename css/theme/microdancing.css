@@ -54,55 +54,27 @@
   text-shadow: none; }
 
 .reveal h1 {
+  max-width: 750px;
+  font-size: 2.3em;
+  font-family: "Nexa Bold", "Helvetica", sans-serif !important;
+  letter-spacing: -1.2em;
+  text-align: left;
+  line-height: 1.055em !important; }
+
+h1.quote {
+  max-width: 100%;
   font-size: 2em;
-  font-family: "Nexa Black", Impact, sans-serif;
-  text-transform: none !important;
-  letter-spacing: -1.5em;
-  text-align: left; }
+  font-family: "Nexa Light", "Helvetica", sans-serif !important;
+  letter-spacing: -1.2em;
+  text-align: center; }
 
-.reveal h2 {
-  font-size: 1.2em;
-  font-family: "Nexa Bold", "Helvetica", sans-serif;
-  letter-spacing: -0.03em !important; }
-
-.reveal h3 {
-  font-size: .6em;
-  font-family: "Nexa Book", "Helvetica", sans-serif;
-  padding-top: 20px; }
-
-.decorator {
-  position: absolute; }
-
-.lines {
-  top: 20%;
-  bottom: auto;
-  left: 33%; }
-
-.ctrls {
-  top: -10px;
-  left: 10px; }
-
-.halph {
-  left: 0; }
-
-.video {
-  position: relative; }
-  .video video {
-    position: absolute;
-    z-index: 10000; }
-  .video .iphone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    margin: 0 auto;
-    display: block;
-    width: 100%;
-    height: 798px;
-    background-image: url(../../img/iphone.png);
-    background-repeat: no-repeat;
-    background-size: 380px 798px;
-    background-position: center center; }
+h1.main {
+  max-width: 750px;
+  font-size: 2.3em;
+  font-family: "Nexa Black", Impact, sans-serif !important;
+  letter-spacing: -1.2em;
+  text-align: left;
+  line-height: 1.055em !important; }
 
 .title {
   position: relative; }
@@ -137,19 +109,6 @@
     position: absolute;
     top: -8px;
     padding-left: 5px; }
-
-.quote {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  padding-left: 250px; }
-  .quote h2 {
-    color: #3bff98 !important; }
-  .quote .column {
-    background-color: #3b5998; }
-  .quote p {
-    width: 75%;
-    margin: 0 auto; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -326,7 +285,8 @@ body {
     display: block; }
 
 .reveal section {
-  text-align: center; }
+  vertical-align: center;
+  max-height: 50px; }
 
 .reveal section img {
   margin: 0px;
@@ -343,3 +303,47 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-color: darkblue;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+.reveal img {
+  max-width: 100%;
+  max-height: 100%; }
+
+.lista-diamante {
+  position: absolute;
+  top: -205px;
+  right: 50px;
+  z-index: 2000; }
+
+.lista-diamante .item {
+  overflow: hidden;
+  float: left;
+  width: 350px;
+  height: 350px;
+  margin-left: -51.625px;
+  margin-right: -51.625px;
+  margin-bottom: 144.97475px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.lista-diamante .item:nth-child(even) {
+  -webkit-transform: translateY(247.48737px) translateX(50px) rotate(45deg);
+  -moz-transform: translateY(247.48737px) translateX(50px) rotate(45deg);
+  -ms-transform: translateY(247.48737px) translateX(50px) rotate(45deg);
+  -o-transform: translateY(247.48737px) translateX(50px) rotate(45deg);
+  transform: translateY(247.48737px) translateX(50px) rotate(45deg); }
+
+.lista-diamante .contenidos {
+  position: relative;
+  width: 494.97475px;
+  height: 494.97475px;
+  -webkit-transform: rotate(-45deg) translateY(-103.25px);
+  -moz-transform: rotate(-45deg) translateY(-103.25px);
+  -ms-transform: rotate(-45deg) translateY(-103.25px);
+  -o-transform: rotate(-45deg) translateY(-103.25px);
+  transform: rotate(-45deg) translateY(-103.25px); }
+  .lista-diamante .contenidos img {
+    width: 100%;
+    height: 100%; }

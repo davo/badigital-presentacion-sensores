@@ -49,6 +49,10 @@ $headingTextTransform: uppercase;
 $headingTextShadow: none;
 $heading1TextShadow: none;
 
+$gridSize: 350;
+$gridHeight: $gridSize * 1.41421356;
+$gridItemXpos: $gridSize * 0.295;
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -57,74 +61,34 @@ $heading1TextShadow: none;
 .reveal h6 {
     margin: $headingMargin;
     color: $headingColor;
-
     line-height: $headingLineHeight;
     letter-spacing: $headingLetterSpacing;
-
     text-shadow: $headingTextShadow;
 }
 
 .reveal h1 {
-    font-size: 2em;
-    font-family: $headingFont;
-    text-transform: none !important;
-    letter-spacing: -1.5em;
+    max-width: 750px;
+    font-size: 2.3em;
+    font-family: $BoldFont !important;
+    letter-spacing: -1.2em;
     text-align: left;
+    line-height: 1.055em !important;
 }
-.reveal h2 {
-    font-size: 1.2em;
-    font-family: $BoldFont;
-    letter-spacing: $headingLetterSpacingTitle !important;
+h1.quote {
+    max-width: 100%;
+    font-size: 2em;
+    font-family: $LightFont !important;
+    letter-spacing: -1.2em;
+    text-align: center;
 }
-.reveal h3 {
-    font-size: .6em;
-    font-family: $DemiFont;
-    padding-top: 20px; 
+h1.main {
+    max-width: 750px;
+    font-size: 2.3em;
+    font-family: $headingFont !important;
+    letter-spacing: -1.2em;
+    text-align: left;
+    line-height: 1.055em !important;
 }
-
-
-.decorator {
-    position: absolute;
-}
-
-.lines {
-    top: 20%;
-    bottom: auto;
-    left: 33%;    
-}
-
-.ctrls {
-    top: -10px;
-    left: 10px;    
-}
-.halph {
-    left: 0;
-}
-
-.video {
-    position: relative;
-    
-    video {
-        position: absolute;
-        z-index: 10000;
-    }
-
-    .iphone {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        margin: 0 auto;
-        display: block;
-        width: 100%;
-        height: 798px;
-        background-image: url(../../img/iphone.png);
-        background-repeat: no-repeat;
-        background-size: 380px 798px;
-        background-position: center center; 
-    }
-}
-
 
 
 .title {
@@ -169,22 +133,22 @@ $heading1TextShadow: none;
     }
 }
 
-.quote {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    padding-left: 250px;
-    h2 {
-        color: $origamiColorAlt !important;
-    }
-    .column {
-        background-color: $origamiColor;
-    }
-    p {
-        width: 75%;
-        margin: 0 auto;
-    }
-}
+// .quote {
+//     width: 100%;
+//     margin: 0 auto;
+//     text-align: center;
+//     padding-left: 250px;
+//     h2 {
+//         color: $origamiColorAlt !important;
+//     }
+//     .column {
+//         background-color: $origamiColor;
+//     }
+//     p {
+//         width: 75%;
+//         margin: 0 auto;
+//     }
+// }
 
 $backgroundColor: #30164e;
 $linkColor: #00008B;
@@ -257,9 +221,8 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 }
 
 .reveal section {
-    
-    text-align: center;
-    // position: relative;
+        vertical-align: center;
+        max-height: 50px;
 }
 
 .reveal section img {
@@ -276,9 +239,52 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
             transition: all .2s linear;
 }
 
-    .reveal a:hover img {
-        background: rgba(255,255,255,0.2);
-        border-color: $linkColor;
+.reveal a:hover img {
+    background: rgba(255,255,255,0.2);
+    border-color: $linkColor;
 
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+.reveal img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.lista-diamante {
+    position: absolute;
+    top: -205px;
+    right: 50px;
+    z-index: 2000;
+}
+
+.lista-diamante .item {
+    overflow: hidden;
+    float: left;
+    width: $gridSize + px;
+    height: $gridSize + px;
+    margin-left: -($gridItemXpos / 2) + px;
+    margin-right: -($gridItemXpos / 2) + px;
+    margin-bottom: $gridHeight - $gridSize + px;
+    @include transform(rotate(45deg));
+}
+
+.lista-diamante .item:nth-child(even) {
+    @include transform(translateY($gridHeight / 2 + px) translateX(50px)  rotate(45deg));
+}
+
+.lista-diamante .contenidos {
+    position: relative;
+    width: $gridHeight + px;
+    height: $gridHeight + px;
+    -webkit-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+    -moz-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+    -ms-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+    -o-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+    transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+
+    img {
+        width: 100%;
+        height: 100%;
     }
+}

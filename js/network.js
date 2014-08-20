@@ -237,6 +237,22 @@ var distance = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
+var radius = 7,
+    max_length = 200,
+    node_count = 200,
+    offset = 100,
+    nodes = [],
+    node_layer,
+    node_style = {
+        fillColor: '#fff'
+    },
+    edge_style = {
+        strokeColor: '#fff',
+        strokeWidth: 1.2
+    },
+    edges = [],
+    edge_layer;
+
 var network = new Network();
 
 window.onload = function() {

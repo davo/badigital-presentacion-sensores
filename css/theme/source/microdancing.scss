@@ -233,6 +233,9 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
     // border: 1px solid green !important;
     text-align: center;
     margin: 0 auto;
+    z-index: 1000;
+    position: absolute;
+    top: -200px;
 
     svg {
         // border: 1px solid red !important;

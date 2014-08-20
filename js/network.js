@@ -1,4 +1,25 @@
+var pusheoNodos = true;
 var canceloFondo = true;
+
+
+var radius = 7,
+    max_length = 200,
+    node_count = 10, //90
+    offset = 100,
+    nodes = [],
+    node_layer,
+    node_style = {
+        fillColor: '#fff'
+    },
+    edge_style = {
+        strokeColor: '#fff',
+        strokeWidth: 1.2
+    },
+    edges = [],
+    edge_layer;
+
+
+
 
 function Network() {
 
@@ -20,15 +41,12 @@ function Network() {
 
     this.draw = function() {
 
-
         var i;
 
         edge_layer.removeChildren();
 
-
         for (i = 0; i < edges.length; i += 1) {
             if (pusheoNodos) {
-
                 edges[i].update();
             }
         }

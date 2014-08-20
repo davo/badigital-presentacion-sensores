@@ -25,16 +25,25 @@
 
 	<body>
 		<div id="creative-content"></div>
+		<div id="posicion">
+			<div class="numero">01</div>
+			<div class="separador parte-uno"></div>
+			<div class="leyenda">Internet de las cosas</div>
+		</div>
 
 		<div class="reveal">
 
 			<div class="slides">
-				<section class="open-data title">
-					<h1>882 días de Gobierno Abierto</h1>
-					<h2></h2>
+				<section class="open-data">
+					<div class="icono" id="open-data"></div>
+					<div class="contenido">
+						<h1>882 días de Gobierno Abierto</h1>
+					</div>
 				</section>
-				<section data-state="second">
-					<div class="title quote">BA Data 1.0</div>
+				<section data-state="segundo">
+					<div class="contenido">
+						<h1>BA Data 1.0</h1>
+					</div>
 
 				</section>
 				<section>
@@ -103,15 +112,15 @@
 
 		
 
-		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 		<script src="js/network.js"></script>
+		<script src="js/iconos.js"></script>
 
 
 		<script>
+
 		var pusheoNodos = true;
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
+
 			Reveal.initialize({
 				controls: false,
 				progress: false,
@@ -139,59 +148,73 @@
 				]
 			});
 
-			var
-			content = $('.open-data h1'),
-			tl,contentSplit = new SplitText(content, {type:"words"}),
-			creative = $('#creative-content'),
-			tl = new TimelineMax({paused:true,autoRemoveChildren: true});
+			function animarPath (idPath,idIcono){
+		    	var orig = document.querySelector(idPath), length;
+				var obj = {length:0, pathLength:orig.getTotalLength()};
+				var t = TweenMax.to(obj, 1.5, {length:obj.pathLength, onUpdate:drawLine, onUpdateParams:[orig,obj], ease:Power2.easeInOut},2.75)
+				TweenMax.to(document.querySelector(idIcono), 0.2, {opacity:"1"});
+		    }
 
-			TweenLite.set(content, {perspective:500});
-			tl.add("Open Data Titulo")
-			tl.to(creative,0.4,{opacity:0.7});
-			tl.staggerFrom(contentSplit.words, 0.75, {scale:.5,opacity:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.1);
-			tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
+		    // Callback de update del SVG
+			function drawLine(or,ob) {
+			  or.style.strokeDasharray = [ob.length,ob.pathLength].join(' ');
+			}
+
+
+			function animarIcono(){
+				animarPath('#hexagono','#open-data-svg');
+				animarPath('#flusk','#open-data-svg');
+				animarPath('#flusk-top','#open-data-svg');
+			}
+
+			var content, contentSplit, creative, tl, icono, master;
+
+			master = new TimelineMax();
+			master.eventCallback("onComplete", function() {
+			});
+
+			creative = $('#creative-content');
+			content = $('.open-data h1');
+			contentSplit = new SplitText(content, {type:"words"});
+			icono = $('#open-data');
+			
+
+			
+
+			TweenLite.set(content, {perspective:700});
+
+			function resumeTimeline(seconds) {
+			    TweenLite.delayedCall(seconds, this.resume, null, this);
+			}
+			function openData() {
+				tl = new TimelineLite({paused:true});
+				tl.add("OpenData")
+				tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
+				tl.addPause(0.5, resumeTimeline, [5]);
+				tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
+				tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
+
+				// tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
+
+			}
 
 			Reveal.addEventListener( 'ready', function( event ) {
-			    // event.previousSlide, event.currentSlide, event.indexh, event.indexv
-			 	TweenLite.to(creative,0.4,{opacity:1});
-			  	setTimeout(function(){
-			  		tl.play();
-			  	}, 3000);
-			
-			 Reveal.addEventListener('second', function (event) {
-				pusheoNodos = false;
-			 	TweenLite.to(creative,0.4,{opacity:0, onComplete:borroNodos} );
+
+			  	master.add(openData());
+
+			}, false);
+
+			Reveal.addEventListener('segundo', function (event) {
+				// pusheoNodos = false;
+			 	// TweenLite.to(creative,0.4,{opacity:0, onComplete:borroNodos} );
 			 }, false);
-			});
+			
+			 
 
 			// callback para borrar los nodos una vez que termina el tween
 			function borroNodos(){
-				node_layer.removeChildren();
-				edge_layer.removeChildren();
-
-/// SVG ANIMATION
- var svgContainer = document.getElementById("animation");
- var nS="http://www.w3.org/2000/svg";
- var animation = new TimelineMax();
- animation.pause();
- var svgPaths = a.getElementsByTagNameNS(nS,"path");
- for(var x = 0; x<svgPaths.length;x++){
- 	alert("ansnd");
- var path = svgPaths[x];
- var pathDimensions = path.getTotalLength();
- var strokeWidth = path.getAttribute("stroke-width");
- path.style.strokeDasharray = (pathDimensions)+" "+(pathDimensions);
- path.style.strokeDashoffset = (/Firefox/i.test(navigator.userAgent))? pathDimensions/strokeWidth : pathDimensions;
- animation.add(TweenMax.to(path.style,1,{strokeDashoffset:0,onUpdate:function(){
- var n = document.createTextNode(' ');
- document.body.appendChild(n);
- document.body.removeChild(n);
- }}),(x>0)?"-=0.8":"");
- }
- animation.play();
-
-
-
+				// node_layer.removeChildren();
+				// edge_layer.removeChildren();
 			}
 
 		</script>

@@ -16,14 +16,21 @@
 @import "../../../bower_components/bourbon/dist/bourbon";
 
 @include font-face('Nexa Black', '../fonts/Nexa-Black');
+@include font-face('Nexa Bold', '../fonts/Nexa-Bold');
+@include font-face('Nexa Book', '../fonts/Nexa-Book');
+@include font-face('Nexa Heavy', '../fonts/Nexa-Heavy');
+@include font-face('Nexa Light', '../fonts/Nexa-Light');
+@include font-face('Nexa Regular', '../fonts/Nexa-Regular');
 
 $main-color: #4512C4;
-
+$parte-uno: #7c00ff;
 
 // Override theme settings (see ../template/settings.scss)
-$mainFont: 'Nexa Black', 'Helvetica', sans-serif;
-$mainDemiFont: 'Nexa Black', 'Helvetica', sans-serif;
-$mainBoldFont: 'Nexa Black', 'Helvetica', sans-serif;
+$mainFont: 'Nexa Regular', 'Helvetica', sans-serif;
+$DemiFont: 'Nexa Book', 'Helvetica', sans-serif;
+$HeavyFont: 'Nexa Heavy', 'Helvetica', sans-serif;
+$BoldFont: 'Nexa Bold', 'Helvetica', sans-serif;
+$LightFont: 'Nexa Light', 'Helvetica', sans-serif;
 $mainColor: #fff;
 
 $origamiColor: #3B5998;
@@ -60,39 +67,19 @@ $heading1TextShadow: none;
 .reveal h1 {
     font-size: 2em;
     font-family: $headingFont;
-    text-transform: $headingTextTransform;
+    text-transform: none !important;
     letter-spacing: -1.5em;
     text-align: left;
 }
 .reveal h2 {
     font-size: 1.2em;
-    font-family: $mainBoldFont;
+    font-family: $BoldFont;
     letter-spacing: $headingLetterSpacingTitle !important;
 }
 .reveal h3 {
     font-size: .6em;
-    font-family: $mainDemiFont;
+    font-family: $DemiFont;
     padding-top: 20px; 
-}
-
-.window {
-    // Overide sobre efectos de reveal sobre parent.
-
-    border: 1px solid #FC790D !important;
-    margin: 20px auto !important;
-    // padding: 80px 10px 20px 10px !important;
-    width: 600px;
-    height: 300px;
-    position: relative;
-
-    @include border-top-radius(15px);
-    @include border-bottom-radius(15px);
-    @include border-left-radius(15px);
-    @include border-right-radius(15px);
-
-    h1 {
-        margin-top: 135px !important;
-    }
 }
 
 
@@ -138,6 +125,8 @@ $heading1TextShadow: none;
     }
 }
 
+
+
 .title {
     position: relative;
     
@@ -180,24 +169,6 @@ $heading1TextShadow: none;
     }
 }
 
-.origami {
-    h2 {
-        color: $origamiColorAlt !important;
-    }
-    .column {
-        background-color: $origamiColor;
-    }
-}
-
-.framer {
-    h2 {
-        color: $framerColorAlt !important;
-    }
-    .column {
-        background-color: $framerColor;
-    }
-}
-
 .quote {
     width: 100%;
     margin: 0 auto;
@@ -228,6 +199,67 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
     width: 100%;
     height: 100%;
     position: absolute;
+}
+
+.contenido {
+    // position: absolute;
+    // display: none;
+}
+
+.icono {
+    display: block;
+    width: 100%;
+    height: 550px;
+    // border: 1px solid green !important;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 1000;
+    position: absolute;
+    top: -180px;
+
+    svg {
+        // border: 1px solid red !important;
+        display: block;
+        width: inherit;
+        height: inherit;
+    }
+}
+
+#posicion {
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    color: $mainColor;
+    .numero {
+        text-align: center;
+        font-family: $LightFont;
+        font-size: 4.8em;
+        padding-right: 15px;
+        padding-bottom: 10px;
+    }
+    .separador {
+        display: block;
+        width: 180px;
+        
+    &.parte-uno {
+        border-top: 5px solid $parte-uno;
+        }
+    }
+    .leyenda {
+        font-family: $HeavyFont;
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 70%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.reveal section {
+    
+    text-align: center;
+    // position: relative;
 }
 
 .reveal section img {

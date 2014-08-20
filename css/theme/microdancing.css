@@ -285,7 +285,8 @@ body {
     display: block; }
 
 .reveal section {
-  text-align: center; }
+  vertical-align: center;
+  max-height: 50px; }
 
 .reveal section img {
   margin: 0px;

@@ -221,9 +221,8 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 }
 
 .reveal section {
-    
-    text-align: center;
-    // position: relative;
+        vertical-align: center;
+        max-height: 50px;
 }
 
 .reveal section img {

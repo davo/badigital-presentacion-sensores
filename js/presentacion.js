@@ -23,7 +23,7 @@ Reveal.initialize({
 // @param: String (ID del path) 
 // @param: String (ID del icono)
 function animarPath(idPath, idIcono) {
-	console.log (idPath, idIcono)
+    console.log(idPath, idIcono)
     var orig = document.querySelector(idPath),
         length;
     var obj = {
@@ -49,18 +49,18 @@ function drawLine(or, ob) {
 
 // Anima todos los children de un SVG
 // @param: String (ID del SVG)
-function animaSVG(param){
-	var ico = $(param)
-		for (var i = 0; i < ico.children().length; i++){
-			var childID = '#' + ico.children()[i].id;
-			var parentID =  '#' + ico[0].id;
-			console.log(ico)
-		    animarPath(childID, parentID);
-		}
+function animaSVG(param) {
+    var ico = $(param)
+    for (var i = 0; i < ico.children().length; i++) {
+        var childID = '#' + ico.children()[i].id;
+        var parentID = '#' + ico[0].id;
+        console.log(ico)
+        animarPath(childID, parentID);
+    }
 }
 
 function animarIcono() {
-	animaSVG('#open-data-svg');
+    animaSVG('#open-data svg');
 }
 
 var contentOpenData, contentSplit, contentBASplit, creative, tl, icono;
@@ -70,11 +70,12 @@ contentOpenData = $('h1');
 contentSplit = new SplitText(contentOpenData, {
     type: "words"
 });
+
 contentBAData = $('.ba-data h1');
 contentBASplit = new SplitText(contentBAData, {
     type: "words"
 });
-icono = $('#open-data');
+
 
 
 TweenLite.set(contentOpenData, {
@@ -90,26 +91,27 @@ Reveal.addEventListener('ready', function(event) {
 }, false);
 
 Reveal.addEventListener('open-data', function(event) {
-	tl = new TimelineMax();
+	icono = $('#open-data');
 
-tl.add("OpenData")
-	tl.to(creative, 0.4, {
-	    opacity: 0.7,
-	    onComplete: animarIcono
-	});
-	tl.addPause(0.5, resumeTimeline, [5]);
-	tl.to(icono, 0.85, {
-	    scale: .35,
-	    x: -520,
-	    y: -210,
-	    rotationY: 360,
-	    ease: Expo.easeInOut
-	}, 0.5);
-	tl.staggerFrom(contentSplit.words, 0.75, {
-	    autoAlpha: 0,
-	    rotationX: -100,
-	    transformOrigin: "50% top -250",
-	    ease: Power1.easeInOut
-	}, 0.05);
+    tl = new TimelineMax();
+
+    tl.add("OpenData")
+    tl.to(creative, 0.4, {
+        opacity: 0.7,
+        onComplete: animarIcono
+    });
+    tl.addPause(0.5, resumeTimeline, [5]);
+    tl.to(icono, 0.85, {
+        scale: .35,
+        x: -520,
+        y: -210,
+        rotationY: 360,
+        ease: Expo.easeInOut
+    }, 0.5);
+    tl.staggerFrom(contentSplit.words, 0.75, {
+        autoAlpha: 0,
+        rotationX: -100,
+        transformOrigin: "50% top -250",
+        ease: Power1.easeInOut
+    }, 0.05);
 }, false);
-

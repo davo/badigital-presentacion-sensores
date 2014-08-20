@@ -49,7 +49,7 @@ $headingTextTransform: uppercase;
 $headingTextShadow: none;
 $heading1TextShadow: none;
 
-$gridSize: 400;
+$gridSize: 350;
 $gridHeight: $gridSize * 1.41421356;
 $gridItemXpos: $gridSize * 0.295;
 
@@ -61,74 +61,34 @@ $gridItemXpos: $gridSize * 0.295;
 .reveal h6 {
     margin: $headingMargin;
     color: $headingColor;
-
     line-height: $headingLineHeight;
     letter-spacing: $headingLetterSpacing;
-
     text-shadow: $headingTextShadow;
 }
 
 .reveal h1 {
-    max-width: 600px;
-    font-size: 2em;
-    font-family: $headingFont;
+    max-width: 750px;
+    font-size: 2.3em;
+    font-family: $BoldFont !important;
     letter-spacing: -1.2em;
     text-align: left;
+    line-height: 1.055em !important;
 }
-.reveal h2 {
-    font-size: 1.2em;
-    font-family: $BoldFont;
-    letter-spacing: $headingLetterSpacingTitle !important;
+h1.quote {
+    max-width: 100%;
+    font-size: 2em;
+    font-family: $LightFont !important;
+    letter-spacing: -1.2em;
+    text-align: center;
 }
-.reveal h3 {
-    font-size: .6em;
-    font-family: $DemiFont;
-    padding-top: 20px; 
+h1.main {
+    max-width: 750px;
+    font-size: 2.3em;
+    font-family: $headingFont !important;
+    letter-spacing: -1.2em;
+    text-align: left;
+    line-height: 1.055em !important;
 }
-
-
-.decorator {
-    position: absolute;
-}
-
-.lines {
-    top: 20%;
-    bottom: auto;
-    left: 33%;    
-}
-
-.ctrls {
-    top: -10px;
-    left: 10px;    
-}
-.halph {
-    left: 0;
-}
-
-.video {
-    position: relative;
-    
-    video {
-        position: absolute;
-        z-index: 10000;
-    }
-
-    .iphone {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 10;
-        margin: 0 auto;
-        display: block;
-        width: 100%;
-        height: 798px;
-        background-image: url(../../img/iphone.png);
-        background-repeat: no-repeat;
-        background-size: 380px 798px;
-        background-position: center center; 
-    }
-}
-
 
 
 .title {
@@ -173,22 +133,22 @@ $gridItemXpos: $gridSize * 0.295;
     }
 }
 
-.quote {
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-    padding-left: 250px;
-    h2 {
-        color: $origamiColorAlt !important;
-    }
-    .column {
-        background-color: $origamiColor;
-    }
-    p {
-        width: 75%;
-        margin: 0 auto;
-    }
-}
+// .quote {
+//     width: 100%;
+//     margin: 0 auto;
+//     text-align: center;
+//     padding-left: 250px;
+//     h2 {
+//         color: $origamiColorAlt !important;
+//     }
+//     .column {
+//         background-color: $origamiColor;
+//     }
+//     p {
+//         width: 75%;
+//         margin: 0 auto;
+//     }
+// }
 
 $backgroundColor: #30164e;
 $linkColor: #00008B;
@@ -294,8 +254,8 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 
 .lista-diamante {
     position: absolute;
-    top: -200px;
-    right: -200px;
+    top: -205px;
+    right: 50px;
     z-index: 2000;
 }
 

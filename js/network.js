@@ -1,7 +1,3 @@
-var pusheoNodos = true;
-var canceloFondo = true;
-
-
 var radius = 7,
     max_length = 200,
     node_count = 10, //90
@@ -18,20 +14,16 @@ var radius = 7,
     edges = [],
     edge_layer;
 
-
-
-
 function Network() {
 
     this.init = function() {
         paper.install(window);
         paper.setup('canvas');
-
         edge_layer = new Layer();
         node_layer = new Layer();
 
         // Create nodes
-        for (var i = 0; i < node_count && canceloFondo; i += 1) {
+        for (var i = 0; i < node_count; i++) {
             setTimeout(this.add_node, 250 * i);
         }
 
@@ -40,34 +32,24 @@ function Network() {
     };
 
     this.draw = function() {
-
         var i;
-
         edge_layer.removeChildren();
 
         for (i = 0; i < edges.length; i += 1) {
-            if (pusheoNodos) {
-                edges[i].update();
-            }
+            edges[i].update();
         }
 
         for (i = 0; i < nodes.length; i += 1) {
-            
-            if (pusheoNodos) {
-                nodes[i].wander();
-                nodes[i].update();
-                nodes[i].checkBounds();
-            }
-
+            nodes[i].wander();
+            nodes[i].update();
+            nodes[i].checkBounds();
         }
     };
 
     this.add_node = function(x, y) {
         var node = new Node();
         node.init(x, y);
-        if (pusheoNodos) {
-            nodes.push(node);
-        }
+        nodes.push(node);
     };
 
     this.removeAll = function() {
@@ -128,8 +110,6 @@ function Node() {
         if (typeof x !== 'undefined' && typeof y !== 'undefined') {
             this.location = new Point(x, y);
         }
-            
-
 
         // this.path.opacity = Math.random() * .9;
         this.path.style = node_style;
@@ -198,18 +178,14 @@ function Node() {
             target;
 
         wanderTheta += Math.random() * (change * 2) - change;
-
         circleLocation = this.velocity.clone();
         circleLocation = circleLocation.normalize();
         circleLocation.x *= wanderD;
         circleLocation.y *= wanderD;
         circleLocation.x += this.location.x;
         circleLocation.y += this.location.y;
-
         circleOffset = new Point(wanderR * Math.cos(wanderTheta), wanderR * Math.sin(wanderTheta));
-
         target = new Point(circleLocation.x + circleOffset.x, circleLocation.y + circleOffset.y);
-
         this.seek(target);
     };
 
@@ -237,27 +213,10 @@ var distance = function(x1, y1, x2, y2) {
     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
-var radius = 7,
-    max_length = 50,
-    node_count = 100,
-    offset = 100,
-    nodes = [],
-    node_layer,
-    node_style = {
-        fillColor: '#fff'
-    },
-    edge_style = {
-        strokeColor: '#fff',
-        strokeWidth: 1.2
-    },
-    edges = [],
-    edge_layer;
-
 var network = new Network();
 
 window.onload = function() {
     var container = $('#creative-content'),
         canvas = $('<canvas id="canvas" resize></canvas>').appendTo(container);
     network.init();
-
 }

@@ -9,7 +9,11 @@
 <body bgcolor="black">
 <div style="text-align: center;">
 
+<<<<<<< HEAD
     <!-- <svg version="1.1" id="casita" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 450" enable-background="new 0 0 450 450" xml:space="preserve" width="450px" height="450px">
+=======
+    <svg  style="opacity:0" version="1.1" id="casita" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 450 450" enable-background="new 0 0 450 450" xml:space="preserve" width="450px" height="450px">
+>>>>>>> 41cfffc9be77783bb3f4b8bcfc3e2946bec91edb
         <path style="fill:none;stroke:#ffffff;stroke-width:30;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="M 62.5,125 224,25 387.5,125 387.5,325 224,425 62.5,325 l 0,-100" id="hexagono" />
         <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 321.7,365 0.8,-200 -98.5,60 0,200" id="puerta" />
         <path style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10" d="m 289,265 -31.5,20 0,-40 31.5,-20 z" id="ventana" />
@@ -25,10 +29,15 @@
 	M217.7,171.6h64.6"/>
 
 	<div>
+<<<<<<< HEAD
 	    <button onClick="javascript:animarPath('#hexagono');">Hexágono</button>
 	    <button onClick="javascript:animarPath('#puerta');">Puerta</button>
 	    <button onClick="javascript:animarPath('#ventana');">Ventana</button>
 	    <button onClick="javascript:animarPath('#hexagono');animarPath('#flusk');animarPath('#flusk-top');">Los 3</button>
+=======
+	    <button onClick="javascript:animarPath('#hexagono','#casita');animarPath('#puerta','#casita');animarPath('#ventana','#casita');">Mostrar</button>
+		<button onClick="javascript:TweenMax.to(document.querySelector('#casita'), 0.25, {opacity:0});">Ocultar</button>
+>>>>>>> 41cfffc9be77783bb3f4b8bcfc3e2946bec91edb
 	</div>
 
 </div>
@@ -49,12 +58,14 @@
 	  	 *
 		 */
 
-		// Anima el SVG
+		// Muestra el SVG animandolo 
 		// @param: Sting (ID del path a animar)
-	    function animarPath (idPath){
+		// @param: Sting (ID del icono a mostrar)
+	    function animarPath (idPath,idIcono){
 	    	var orig = document.querySelector(idPath), length;
 			var obj = {length:0, pathLength:orig.getTotalLength()};
 			var t = TweenMax.to(obj, 1, {length:obj.pathLength, onUpdate:drawLine, onUpdateParams:[orig,obj], ease:Linear.easeNone})
+			TweenMax.to(document.querySelector(idIcono), 0.25, {opacity:"1"});
 	    }
 
 	    //callback de update del SVG

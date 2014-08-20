@@ -145,6 +145,8 @@ $heading1TextShadow: none;
     }
 }
 
+
+
 .title {
     position: relative;
     
@@ -187,24 +189,6 @@ $heading1TextShadow: none;
     }
 }
 
-.origami {
-    h2 {
-        color: $origamiColorAlt !important;
-    }
-    .column {
-        background-color: $origamiColor;
-    }
-}
-
-.framer {
-    h2 {
-        color: $framerColorAlt !important;
-    }
-    .column {
-        background-color: $framerColor;
-    }
-}
-
 .quote {
     width: 100%;
     margin: 0 auto;
@@ -237,6 +221,27 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
     position: absolute;
 }
 
+.contenido {
+    // position: absolute;
+    // display: none;
+}
+
+.icono {
+    display: block;
+    width: 100%;
+    height: 550px;
+    // border: 1px solid green !important;
+    text-align: center;
+    margin: 0 auto;
+
+    svg {
+        // border: 1px solid red !important;
+        display: block;
+        width: inherit;
+        height: inherit;
+    }
+}
+
 #posicion {
     position: absolute;
     bottom: 30px;
@@ -266,6 +271,12 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
         margin: 0 auto;
         display: block;
     }
+}
+
+.reveal section {
+    
+    text-align: center;
+    // position: relative;
 }
 
 .reveal section img {

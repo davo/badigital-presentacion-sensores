@@ -6,4 +6,4 @@ node_modules/
 .sass-cache
 bower_components/
 captura-osc/
-contenido.md
+*.md

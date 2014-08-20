@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 	<head>
 		<meta charset="utf-8">
@@ -25,10 +25,11 @@
 
 	<body>
 		<div id="creative-content"></div>
-		<div id="posicion">
-			<div class="numero">01</div>
+
+		<div id="posicion" style="opacity: 0;">
+			<div id="numero" class="numero">01</div>
 			<div class="separador parte-uno"></div>
-			<div class="leyenda">Gobierno Abierto</div>
+			<div id="leyenda" class="leyenda">Gobierno Abierto</div>
 		</div>
 
 		<div class="reveal">
@@ -39,9 +40,9 @@
 				</section>
 				
 
-				<section>
+				<section data-state="gobierno-abierto">
 					<div class="icono" id="open-data"></div>
-					<h1 class="titulo">882 días</h1>
+					<h1 class="titulo main">882 días</h1>
 
 					<ul class="lista-diamante">
 					    <li class="item">
@@ -192,7 +193,7 @@
 					<h1 class="titulo">Vamos a dar el siguiente paso</h1>
 					<aside class="notes">Eso significa que tenemos que dar el siguiente paso.</aside>
 				</section>
-				<section>
+				<section data-state="internet">
 					<h1 class="titulo">Internet de las cosas</h1>
 					<aside class="notes">Antes de seguir quiero darles un poco de contexto, sobre una de las nuevas fronteras tecnológicas del mundo,  un lugar donde queremos llegar, entre todos.
 					Es algo que llaman Internet de las Cosas. </aside>
@@ -244,7 +245,7 @@
 					<aside class="notes">Pensemos a la API como el sistema de containers. Vos podes poner lo que quieras dentro de tu conteiner. Si ese container cumple con la norma va a ser facil trasladarlo, subirlo al barco, bajarlo meterlo en un camión, lo que quieras. Es decir, que siempre que respetes esas guías vas a poder transaccionar lo que quieras por todo el mundo, si quisieras. Las APIs son algo muy parecido. Es un sistema que permite comunicarte con un servicio, en este caso de sensores, de IOT. Siempre que vos respetes las guías de como hablar con esa API, vas a poder pedir y dar información, todo lo que quieras.</aside>
 				</section>
 
-				<section>
+				<section data-state="datos">
 					<h1 class="titulo main">Datos en tiempo real</h1>
 					<aside class="notes">Tenemos que dar el siguiente paso. Y ese es: datos en tiempo real. Pero en gobierno tenemos una carencia en lo que refiere a este servicio. Antes de empezar a buscar una solución épica, lo que hicimos desde la DG es empezar a recorrer todas las àreas producen este tipo de informaciòn para comprender el estado de situación.</aside>
 				</section>
@@ -325,7 +326,7 @@
 					<aside class="notes">Nuestra idea es pensar y resolver una infraestructura de transporte de datos de tiempo real. Queremos convocar a todos a pensar en problemas reales y casos de uso posible.
 					 	Trabajando colaborativamente cómo utilizar los datos generados por estos sensores podremos crear infinitas nuevas posibilidades.</aside> 
 				</section>
-				<section>
+				<section data-state="prototipo">
 					<h1 class="titulo main">Generar datos en tiempo real<br></h1> 
 				</section>
 				<section>
@@ -337,146 +338,85 @@
 				<section>
 					<h1 class="titulo main">Proyecto de todos</h1>
 				</section>
-				<section>
+				<section data-state="gracias">
 					<h1 class="titulo quote">Muchas Gracias</h1>
 					<ul>
 						<li class="social twitter">@LABgcba</li>
 						<li class="social facebook">/LABgcba</li>
 					</ul>
 				</section>
-
-
 				
 			</div>
 
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
-
 		<script src="js/reveal.min.js"></script>
 		<script src="js/network.js"></script>
-		<script src="js/iconos.js"></script>
-		
-
 
 		<script>
-
-		var pusheoNodos = true;
-
+			var posicion = $('#posicion');
+			var numero = $('#numero');
+			var leyenda = $("#leyenda");
+			
 			Reveal.initialize({
 				controls: false,
 				progress: false,
-				history: true,
+				history: false,
 				center: true,
 				width: 1400,
 				height: 700,
-
 				theme: 'microdancing', // available themes are in /css/theme
 				transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
-
-				// Parallax scrolling
-				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
-
-				// Optional libraries used to extend on reveal.js
 				dependencies: [
 					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					// { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					// { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					// { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					// { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-			  //       { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-
 				]
 			});
 
-			function animarPath (idPath,idIcono){
-		    	var orig = document.querySelector(idPath), length;
-				var obj = {length:0, pathLength:orig.getTotalLength()};
-				var t = TweenMax.to(obj, 1.5, {length:obj.pathLength, onUpdate:drawLine, onUpdateParams:[orig,obj], ease:Power2.easeInOut},2.75)
-				TweenMax.to(document.querySelector(idIcono), 0.2, {opacity:"1"});
-		    }
-
-		    // Callback de update del SVG
-			function drawLine(or,ob) {
-			  or.style.strokeDasharray = [ob.length,ob.pathLength].join(' ');
-			}
-
-
-			function animarIcono(){
-				animarPath('#hexagono','#open-data-svg');
-				animarPath('#flusk','#open-data-svg');
-				animarPath('#flusk-top','#open-data-svg');
-			}
-
-			var contentOpenData, contentSplit, contentBASplit, creative, tl, icono, master;
-
-			
-
-			creative = $('#creative-content');
-			// contentOpenData = $('.open-data h1');
-			// contentSplit = new SplitText(contentOpenData, {type:"words"});
-			// contentBAData = $('.ba-data h1');
-			// contentBASplit = new SplitText(contentBAData, {type:"words"});
-			// 
-			icono = $('#open-data');
-
-
-			TweenLite.set(contentOpenData, {perspective:70});
-
-			function resumeTimeline(seconds) {
-			    TweenLite.delayedCall(seconds, this.resume, null, this);
-			}
-
-			tl = new TimelineMax({paused:true});
-			tl.eventCallback("onComplete", function() {
-				console.log('message');
-			});
-
-			// tl.add("OpenData")
-			// tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
-			// tl.addPause(0.5, resumeTimeline, [5]);
-			// tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
-			// tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
-			
-			
-			// TweenLite.set(contentOpenData, {perspective:70});
-
-			
-
-			
-			// function openData(status) {
-			// 	tl = new TimelineLite({paused:status});
-			// 	tl.add("OpenData")
-			// 	tl.to(creative,0.4,{opacity:0.7,onComplete:animarIcono});
-			// 	tl.addPause(0.5, resumeTimeline, [5]);
-			// 	tl.to(icono,0.85,{scale:.35,x:-520,y:-210,rotationY:360,ease:Expo.easeInOut},0.5);
-			// 	tl.staggerFrom(contentSplit.words, 0.75, {autoAlpha:0, rotationX:-100, transformOrigin:"50% top -250",ease:Power1.easeInOut}, 0.05);
-			// 	tl.addPause();
-			// 	tl.add("BAData")
-
-			// 	// tl.to(content,0.75,{scale:.5,x:-100,ease:Power2.easeInOut},3);
-
-			// }
-
 			Reveal.addEventListener( 'ready', function( event ) {
-
-			  	
 
 			}, false);
 
-			// Reveal.addEventListener('open-data', function (event) {
-			// 	tl.play();
-			//  }, false);
-			
-			 
+			Reveal.addEventListener('gobierno-abierto', function(event) {
 
-			// callback para borrar los nodos una vez que termina el tween
-			function borroNodos(){
-				// node_layer.removeChildren();
-				// edge_layer.removeChildren();
-			}
+				var creative = $('#creative-content');
+
+    			var tl1 = new TimelineMax();
+			    tl1.to(creative, 0.4, { opacity: 0.7 });
+    			var tl2 = new TimelineMax();
+			    tl2.to(posicion, 0.4, { opacity: 1.0 });
+
+			}, false);
+
+			Reveal.addEventListener('internet', function(event) {
+    			var tl2 = new TimelineMax();
+			    tl2.to(posicion, 0, { opacity: 0 });
+				numero.html("02");
+				leyenda.html("Internet de las cosas");
+			    tl2.to(posicion, 0.5, { opacity: 1.0 });
+			}, false);
+
+			Reveal.addEventListener('datos', function(event) {
+    			var tl2 = new TimelineMax();
+			    tl2.to(posicion, 0, { opacity: 0 });
+				numero.html("03");
+				leyenda.html("Datos en Tiempo Real");
+			    tl2.to(posicion, 0.5, { opacity: 1 });
+			}, false);
+
+			Reveal.addEventListener('prototipo', function(event) {
+    			var tl2 = new TimelineMax();
+			    tl2.to(posicion, 0, { opacity: 0 });
+				numero.html("04");
+				leyenda.html("Prototipo Dashboard");
+			    tl2.to(posicion, 0.5, { opacity: 1 });
+			}, false);
+
+			Reveal.addEventListener('gracias', function(event) {
+    			var tl2 = new TimelineMax();
+			    tl2.to(posicion, 0, { opacity: 0 });
+			}, false);
 
 		</script>
 

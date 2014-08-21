@@ -347,3 +347,43 @@ body {
   .lista-diamante .contenidos img {
     width: 100%;
     height: 100%; }
+
+.diamante {
+  position: absolute;
+  top: -130px;
+  right: 50px;
+  z-index: 2000; }
+
+.diamante .item {
+  overflow: hidden;
+  float: left;
+  width: 400px;
+  height: 400px;
+  margin-left: -59px;
+  margin-right: -59px;
+  margin-bottom: 165.68542px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg); }
+
+.diamante .item:nth-child(even) {
+  -webkit-transform: translateY(282.84271px) translateX(50px) rotate(45deg);
+  -moz-transform: translateY(282.84271px) translateX(50px) rotate(45deg);
+  -ms-transform: translateY(282.84271px) translateX(50px) rotate(45deg);
+  -o-transform: translateY(282.84271px) translateX(50px) rotate(45deg);
+  transform: translateY(282.84271px) translateX(50px) rotate(45deg); }
+
+.diamante .contenidos {
+  position: relative;
+  width: 565.68542px;
+  height: 565.68542px;
+  -webkit-transform: rotate(-45deg) translateY(-118px);
+  -moz-transform: rotate(-45deg) translateY(-118px);
+  -ms-transform: rotate(-45deg) translateY(-118px);
+  -o-transform: rotate(-45deg) translateY(-118px);
+  transform: rotate(-45deg) translateY(-118px); }
+  .diamante .contenidos img {
+    width: 100%;
+    height: 100%; }

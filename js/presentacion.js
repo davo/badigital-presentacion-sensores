@@ -11,10 +11,11 @@ var posicion = $('#posicion');
 var numero = $('#numero');
 var leyenda = $("#leyenda");
 
+
 Reveal.initialize({
     controls: false,
     progress: false,
-    history: true,
+    history: false,
     center: true,
     width: 1400,
     height: 700,
@@ -27,7 +28,9 @@ Reveal.initialize({
 });
 
 Reveal.addEventListener( 'ready', function( event ) {
-
+    //selecciona el DIV donde va el SVG y le inyecta el icono
+   //$("#iconoSVG").html(getIcon("casa"));
+   //animaSVG("#iconoSVG");
 }, false);
 
 Reveal.addEventListener('inicio', function(event) {
@@ -113,16 +116,19 @@ Reveal.addEventListener('slidechanged', function(event) {
     var tl = new TimelineMax();
     var contentOpenData;
 
-
-
     for (var i = 0; i < event.currentSlide.children.length ; i++){
         var tag = event.currentSlide.children[i].localName;
         if (tag == "h1"){
             var contentOpenData = $(event.currentSlide.children[i]);
-            TweenLite.set(contentOpenData, {
-                perspective: 700
+
+            contentSplit = new SplitText(contentOpenData, {
+                type: "words"
             });
-            tl.staggerFrom(contentOpenData, 0.75, {
+
+            TweenLite.set(contentOpenData, {
+                perspective: 500
+            });
+            tl.staggerFrom(contentSplit.words, 0.75, {
                 autoAlpha: 0,
                 rotationX: -100,
                 transformOrigin: "50% top -250",
@@ -136,9 +142,11 @@ Reveal.addEventListener('slidechanged', function(event) {
 
                 tl.staggerFrom(contentOpenData, 0.75, {
                     autoAlpha: 0,
-                    rotationX: -100,
+                    x: (Math.random() * 200) + 500,
+                    rotationZ: 45,
+                    rotationX: 180/2,
                     ease: Power1.easeInOut
-                }, 0.05);
+                }, -1.05);
 
             }
         }

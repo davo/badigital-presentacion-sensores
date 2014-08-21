@@ -21,12 +21,27 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+		<style>
+			#iconoSVG{
+				width: 450px;
+				height: 450px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -225px;
+				margin-top: -225px;
+			}
+		</style>
+
 	</head>
 
 	<body>
+		<div id="iconoSVG"> </div>
+
 		<div id="creative-content"></div>
 
-		<div id="posicion" style="opacity: 0;">
+		<div id="posicion" style="opacity: 0; z-index: 999">
 			<div id="numero" class="numero">01</div>
 			<div class="separador parte-uno"></div>
 			<div id="leyenda" class="leyenda">Gobierno Abierto</div>
@@ -352,6 +367,7 @@
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 		<script src="js/network.js"></script>
+		<script src="js/iconos.js"></script>
 		<script src="js/presentacion.js"></script>
 	</body>
 </html>

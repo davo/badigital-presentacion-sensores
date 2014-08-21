@@ -29,6 +29,7 @@
 
 		<style>
 			.iconoSVG {
+				visibility: hidden;
 				width: 500px;
 				height: 550px;
 				position: absolute;
@@ -36,13 +37,14 @@
 				left: 50%;
 				margin-left: -225px;
 				margin-top: -225px;
+				border: 1px solid red;
 			}
 		</style>
 
 	</head>
 
 	<body>
-		<div class="iconoSVG labs" id="iconoAnimado"></div>
+		<div class="iconoSVG labs"></div>
 
 		<div id="creative-content"></div>
 
@@ -501,13 +503,18 @@
 			MAXLight = 500;  // valor Maximo del sensor de luz
 			maxLight = MAXLight;  // var: Maximo de escala normal de luz
 
+
+
+			colorScale = d3.scale.linear().domain([MINLight, maxLight]).range(["#2F004B", "#554B80", "#BFA1B4", "#E6CA94","#FFF288"]);
+
 			// console.log(dataLight);
+
 
 			// oigo el mensaje del Arduino y cambio el valor del ángulo
 			socket.on('message', function (message) {
 			    valores[message[message.split(",")[0].length - 1]] = parseInt(message.split(",")[1]);
 			    
-
+			    console.log(valores);
 			    if (maxLight < valores[3] ){
 			        maxLight = valores[3] ;
 			    } else {
@@ -521,7 +528,7 @@
 			    // console.log(dataLight);
 
 			    bkg.datum(valores[3])
-			    .transition(1000)
+			    .transition(200)
 			    .style('background-color',function(d) { return colorScale(d); });
 
 

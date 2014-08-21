@@ -31,7 +31,7 @@ Reveal.initialize({
 Reveal.addEventListener( 'ready', function( event ) {
    //selecciona el DIV donde va el SVG y le inyecta el icono
    
-   //$(".labs").html(getIcon("labs"));
+   // $(".labs").html(getIcon("labs"));
    // animaSVG(".labs");
 
 }, false);

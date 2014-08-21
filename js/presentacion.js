@@ -10,12 +10,13 @@
 var posicion = $('#posicion');
 var numero = $('#numero');
 var leyenda = $("#leyenda");
+var iconoAnimado = $('#iconoAnimado');
 
 
 Reveal.initialize({
     controls: false,
     progress: false,
-    history: true,
+    history: false,
     center: true,
     width: 1400,
     height: 700,
@@ -48,13 +49,9 @@ Reveal.addEventListener('inicio', function(event) {
 
 Reveal.addEventListener('gobierno', function(event) {
 
-    $("#iconoAnimado").html(getIcon("labs"));
+    $("#iconoAnimado").html(getIcon("UNO"));
     animaSVG("#iconoAnimado");
 
-
-
-
-    var iconoAnimado = $('#iconoAnimado');
     var tl3 = new TimelineMax();
 
     tl3.to(iconoAnimado, 1.5, {
@@ -78,12 +75,41 @@ Reveal.addEventListener('gobierno-final', function(event) {
     leyenda.html("Gobierno Abierto");
 }, false);
 
+
+Reveal.addEventListener('previo-internet', function(event) {
+
+    var tl2 = new TimelineMax();
+    var tl3 = new TimelineMax();
+
+    tl2.to(posicion, 0.25, { opacity: 0 });
+    tl3.to(iconoAnimado, 0, { opacity: 0, scale: 1, x: 0, y: 0, rotationY: 0 });
+
+    $("#iconoAnimado").html(getIcon("DOS"));
+    animaSVG("#iconoAnimado");
+
+}, false);
+
 Reveal.addEventListener('internet', function(event) {
     var tl2 = new TimelineMax();
+    var tl3 = new TimelineMax();
+
     tl2.to(posicion, 0, { opacity: 0 });
     numero.html("02");
     leyenda.html("Internet de las cosas");
     tl2.to(posicion, 0.5, { opacity: 1.0 });
+
+    tl3.to(iconoAnimado, 0.25, { opacity: 1 });
+
+    tl3.to(iconoAnimado, 1.5, {
+        scale: .35,
+        x: -520,
+        y: -210,
+        rotationY: 360,
+        ease: Expo.easeOut
+    }, 0.5);
+
+    var tl3 = new TimelineMax();
+
 }, false);
 
 Reveal.addEventListener('internet-final', function(event) {
@@ -91,17 +117,56 @@ Reveal.addEventListener('internet-final', function(event) {
     leyenda.html("Internet de las cosas");
 }, false);
 
+Reveal.addEventListener('previo-datos', function(event) {
+
+    var tl2 = new TimelineMax();
+    var tl3 = new TimelineMax();
+
+    tl2.to(posicion, 0.25, { opacity: 0 });
+    tl3.to(iconoAnimado, 0, { opacity: 0, scale: 1, x: 0, y: 0, rotationY: 0 });
+
+    $("#iconoAnimado").html(getIcon("TRES"));
+    animaSVG("#iconoAnimado");
+
+}, false);
+
+
+
 Reveal.addEventListener('datos', function(event) {
     var tl2 = new TimelineMax();
     tl2.to(posicion, 0, { opacity: 0 });
     numero.html("03");
     leyenda.html("Datos en Tiempo Real");
     tl2.to(posicion, 0.5, { opacity: 1 });
+
+    var tl3 = new TimelineMax();
+
+    tl3.to(iconoAnimado, 1.5, {
+        scale: .35,
+        x: -520,
+        y: -210,
+        rotationY: 360,
+        ease: Expo.easeInOut
+    }, 0.5);
+
 }, false);
 
 Reveal.addEventListener('datos-final', function(event) {
     numero.html("03");
     leyenda.html("Datos en Tiempo Real");
+}, false);
+
+Reveal.addEventListener('previo-prototipo', function(event) {
+
+    var tl2 = new TimelineMax();
+    var tl3 = new TimelineMax();
+
+    tl2.to(posicion, 0.25, { opacity: 0 });
+    tl3.to(iconoAnimado, 0, { opacity: 0, scale: 1, x: 0, y: 0, rotationY: 0 });
+
+    $("#iconoAnimado").html(getIcon("CUATRO"));
+    animaSVG("#iconoAnimado");
+
 }, false);
 
 Reveal.addEventListener('prototipo', function(event) {
@@ -110,6 +175,15 @@ Reveal.addEventListener('prototipo', function(event) {
     numero.html("04");
     leyenda.html("Prototipo Dashboard");
     tl2.to(posicion, 0.5, { opacity: 1 });
+    var tl3 = new TimelineMax();
+
+    tl3.to(iconoAnimado, 1.5, {
+        scale: .35,
+        x: -520,
+        y: -210,
+        rotationY: 360,
+        ease: Expo.easeInOut
+    }, 0.5);
 }, false);
 
 Reveal.addEventListener('prototipo-final', function(event) {
@@ -125,6 +199,8 @@ Reveal.addEventListener('prototipo-final', function(event) {
 }, false);
 
 Reveal.addEventListener('gracias', function(event) {
+    var tl3 = new TimelineMax();
+    tl3.to(iconoAnimado, 0, { opacity: 0, scale: 1, x: 0, y: 0, rotationY: 0 });
     var creative = $('#creative-content');
     var tl2 = new TimelineMax();
     tl2.to(posicion, 0, { opacity: 0 });

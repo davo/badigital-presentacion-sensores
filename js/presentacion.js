@@ -8,110 +8,109 @@
  * MIT licensed
  */
 
-// Inicializo presentación.
+
+var posicion = $('#posicion');
+var numero = $('#numero');
+var leyenda = $("#leyenda");
+
 Reveal.initialize({
     controls: false,
     progress: false,
     history: false,
     center: true,
-    width: 1200,
-    theme: 'microdancing', // Temas disponibles en /css/theme
-    transition: 'fade' // default/cube/page/concave/zoom/linear/fade/none
+    width: 1400,
+    height: 700,
+    theme: 'microdancing', // available themes are in /css/theme
+    transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+    dependencies: [
+        { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+        { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
 });
 
-// Anima un path de un ícono predeterminado
-// @param: String (ID del path) 
-// @param: String (ID del icono)
-function animarPath(idPath, idIcono) {
-    console.log(idPath, idIcono)
-    var orig = document.querySelector(idPath),
-        length;
-    var obj = {
-        length: 0,
-        pathLength: orig.getTotalLength()
-    };
-    TweenMax.to(obj, 1.5, {
-        length: obj.pathLength,
-        onUpdate: drawLine,
-        onUpdateParams: [orig, obj],
-        ease: Power2.easeInOut
-    }, 2.75)
-    TweenMax.to(document.querySelector(idIcono), 0.2, {
-        opacity: "1"
-    });
-}
+Reveal.addEventListener( 'ready', function( event ) {
 
-// Callback de onUpdate del tween
-function drawLine(or, ob) {
-    or.style.strokeDasharray = [ob.length, ob.pathLength].join(' ');
-}
-
-
-// Anima todos los children de un SVG
-// @param: String (ID del SVG)
-function animaSVG(param) {
-    var ico = $(param)
-    for (var i = 0; i < ico.children().length; i++) {
-        var childID = '#' + ico.children()[i].id;
-        var parentID = '#' + ico[0].id;
-        console.log(ico)
-        animarPath(childID, parentID);
-    }
-}
-
-function animarIcono() {
-    animaSVG('#sec001 svg');
-}
-
-var contentOpenData, contentSplit, contentBASplit, creative, tl, icono;
-
-creative = $('#creative-content');
-
-contentOpenData = $('h1');
-contentSplit = new SplitText(contentOpenData, {
-    type: "words"
-});
-
-
-TweenLite.set(contentOpenData, {
-    perspective: 700
-});
-
-function resumeTimeline(seconds) {
-    TweenLite.delayedCall(seconds, this.resume, null, this);
-}
-
-
-Reveal.addEventListener('sec001', function(event) {
-	animoSeccion ();
 }, false);
 
+Reveal.addEventListener('inicio', function(event) {
+    var creative = $('#creative-content');
+    var tl1 = new TimelineMax();
+    tl1.to(creative, 0.4, { opacity: 1 });
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0.4, { opacity: 0 });
+}, false);
 
+Reveal.addEventListener('gobierno', function(event) {
 
+    var creative = $('#creative-content');
+    var tl1 = new TimelineMax();
+    tl1.to(creative, 0.4, { opacity: 0.5 });
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0.4, { opacity: 1.0 });
 
+}, false);
 
+Reveal.addEventListener('gobierno-final', function(event) {
+    numero.html("01");
+    leyenda.html("Gobierno Abierto");
+}, false);
 
-function animoSeccion (){
-	icono = $('#sec001');
-    var tl = new TimelineMax();
+Reveal.addEventListener('internet', function(event) {
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0, { opacity: 0 });
+    numero.html("02");
+    leyenda.html("Internet de las cosas");
+    tl2.to(posicion, 0.5, { opacity: 1.0 });
+}, false);
 
-    tl.add("OpenData")
-    tl.to(creative, 0.4, {
-        opacity: 0.7,
-        onComplete: animarIcono
-    });
-    tl.addPause(0.5, resumeTimeline, [5]);
-    tl.to(icono, 0.85, {
-        scale: .35,
-        x: -520,
-        y: -210,
-        rotationY: 360,
-        ease: Expo.easeInOut
-    }, 0.5);
-    tl.staggerFrom(contentSplit.words, 0.75, {
-        autoAlpha: 0,
-        rotationX: -100,
-        transformOrigin: "50% top -250",
-        ease: Power1.easeInOut
-    }, 0.05);
-}
+Reveal.addEventListener('internet-final', function(event) {
+    numero.html("02");
+    leyenda.html("Internet de las cosas");
+}, false);
+
+Reveal.addEventListener('datos', function(event) {
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0, { opacity: 0 });
+    numero.html("03");
+    leyenda.html("Datos en Tiempo Real");
+    tl2.to(posicion, 0.5, { opacity: 1 });
+}, false);
+
+Reveal.addEventListener('datos-final', function(event) {
+    numero.html("03");
+    leyenda.html("Datos en Tiempo Real");
+}, false);
+
+Reveal.addEventListener('prototipo', function(event) {
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0, { opacity: 0 });
+    numero.html("04");
+    leyenda.html("Prototipo Dashboard");
+    tl2.to(posicion, 0.5, { opacity: 1 });
+}, false);
+
+Reveal.addEventListener('prototipo-final', function(event) {
+    var creative = $('#creative-content');
+    var tl2 = new TimelineMax();
+    tl2.to(creative, 0.4, { opacity: 0.5 });
+
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0.4, { opacity: 1 });
+
+    numero.html("04");
+    leyenda.html("Prototipo Dashboard");
+}, false);
+
+Reveal.addEventListener('gracias', function(event) {
+    var creative = $('#creative-content');
+    var tl2 = new TimelineMax();
+    tl2.to(posicion, 0, { opacity: 0 });
+    var tl1 = new TimelineMax();
+    tl1.to(creative, 0.4, { opacity: 1 });
+}, false);
+
+Reveal.addEventListener('slidechanged', function(event) {
+    // todas las diapos
+    console.log(event.currentSlide.children.length);
+}, false);
+

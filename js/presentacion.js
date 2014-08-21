@@ -14,7 +14,7 @@ var leyenda = $("#leyenda");
 Reveal.initialize({
     controls: false,
     progress: false,
-    history: false,
+    history: true,
     center: true,
     width: 1400,
     height: 700,

@@ -53,6 +53,10 @@ $gridSize: 350;
 $gridHeight: $gridSize * 1.41421356;
 $gridItemXpos: $gridSize * 0.295;
 
+$imageSize: 400;
+$imageHeight: $imageSize * 1.41421356;
+$imageItemXpos: $imageSize * 0.295;
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -277,11 +281,40 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
     position: relative;
     width: $gridHeight + px;
     height: $gridHeight + px;
-    -webkit-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
-    -moz-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
-    -ms-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
-    -o-transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
-    transform: rotate(-45deg) translateY(-($gridItemXpos) + px);
+    @include transform(rotate(-45deg) translateY(-($gridItemXpos) + px));
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.diamante {
+    position: absolute;
+    top: -130px;
+    right: 50px;
+    z-index: 2000;
+}
+
+.diamante .item {
+    overflow: hidden;
+    float: left;
+    width: $imageSize + px;
+    height: $imageSize + px;
+    margin-left: -($imageItemXpos / 2) + px;
+    margin-right: -($imageItemXpos / 2) + px;
+    margin-bottom: $imageHeight - $imageSize + px;
+    @include transform(rotate(45deg));
+}
+
+.diamante .item:nth-child(even) {
+    @include transform(translateY($imageHeight / 2 + px) translateX(50px)  rotate(45deg));
+}
+
+.diamante .contenidos {
+    position: relative;
+    width: $imageHeight + px;
+    height: $imageHeight + px;
+    @include transform(rotate(-45deg) translateY(-($imageItemXpos) + px));
 
     img {
         width: 100%;

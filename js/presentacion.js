@@ -15,7 +15,7 @@ var leyenda = $("#leyenda");
 Reveal.initialize({
     controls: false,
     progress: false,
-    history: false,
+    history: true,
     center: true,
     width: 1400,
     height: 700,
@@ -30,8 +30,9 @@ Reveal.initialize({
 Reveal.addEventListener( 'ready', function( event ) {
    //selecciona el DIV donde va el SVG y le inyecta el icono
    
-   // $("#iconoSVG").html(getIcon("casa"));
-   // animaSVG("#iconoSVG");
+   $(".labs").html(getIcon("labs"));
+   // animaSVG(".labs");
+
 }, false);
 
 Reveal.addEventListener('inicio', function(event) {
@@ -127,14 +128,15 @@ Reveal.addEventListener('slidechanged', function(event) {
             });
 
             TweenLite.set(contentOpenData, {
-                perspective: 500
+                perspective: 700
             });
-            tl.staggerFrom(contentSplit.words, 0.75, {
+            tl.staggerFrom(contentSplit.words, .75, {
                 autoAlpha: 0,
-                rotationX: -100,
+                x: 100,
+                rotationY: -100,
                 transformOrigin: "50% top -250",
                 ease: Power1.easeInOut
-            }, 0.05);
+            }, 0.2);
         }
         if (tag == "ul"){
             for (var p = 0; p < event.currentSlide.children[i].children.length ; p++){

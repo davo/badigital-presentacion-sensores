@@ -1,7 +1,7 @@
-var radius = 7,
+var radius = 10,
     max_length = 200,
-    node_count = 10, //90
-    offset = 100,
+    node_count = 10, //300
+    offset = 500,
     nodes = [],
     node_layer,
     node_style = {
@@ -24,7 +24,7 @@ function Network() {
 
         // Create nodes
         for (var i = 0; i < node_count; i++) {
-            setTimeout(this.add_node, 250 * i);
+            setTimeout(this.add_node, 100 * i);
         }
 
         // Set drawing loop

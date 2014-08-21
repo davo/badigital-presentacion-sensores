@@ -59,7 +59,8 @@
   font-family: "Nexa Bold", "Helvetica", sans-serif !important;
   letter-spacing: -1.2em;
   text-align: left;
-  line-height: 1.055em !important; }
+  line-height: 1.055em !important;
+  padding-top: 20px; }
 
 h1.quote {
   max-width: 100%;
@@ -69,11 +70,11 @@ h1.quote {
   text-align: center; }
 
 h1.main {
-  max-width: 750px;
+  max-width: 100%;
   font-size: 2.3em;
   font-family: "Nexa Black", Impact, sans-serif !important;
   letter-spacing: -1.2em;
-  text-align: left;
+  text-align: center;
   line-height: 1.055em !important; }
 
 .title {
@@ -261,7 +262,7 @@ body {
 
 #posicion {
   position: absolute;
-  bottom: 30px;
+  bottom: 250px;
   right: 0;
   color: white; }
   #posicion .numero {
@@ -387,3 +388,17 @@ body {
   .diamante .contenidos img {
     width: 100%;
     height: 100%; }
+
+ul.social {
+  list-style: none;
+  font-size: .8em; }
+  ul.social li {
+    display: block;
+    margin: 20px;
+    padding: 40px 20px; }
+  ul.social .twitter {
+    background-color: #55acee;
+    float: left; }
+  ul.social .facebook {
+    background-color: #3b5998;
+    float: left; }

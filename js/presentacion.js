@@ -1,13 +1,11 @@
 /*
  * Este archivo contiene:
  * La inicialización a la presentacion de Reveal.js
- * Funciones de animacion de íconos SVG
  * Listeners de cada sección
  *
  *
  * MIT licensed
  */
-
 
 var posicion = $('#posicion');
 var numero = $('#numero');
@@ -111,6 +109,50 @@ Reveal.addEventListener('gracias', function(event) {
 
 Reveal.addEventListener('slidechanged', function(event) {
     // todas las diapos
-    console.log(event.currentSlide.children.length);
+
+    var tl = new TimelineMax();
+    var contentOpenData;
+
+
+
+    for (var i = 0; i < event.currentSlide.children.length ; i++){
+        var tag = event.currentSlide.children[i].localName;
+        if (tag == "h1"){
+            var contentOpenData = $(event.currentSlide.children[i]);
+            TweenLite.set(contentOpenData, {
+                perspective: 700
+            });
+            tl.staggerFrom(contentOpenData, 0.75, {
+                autoAlpha: 0,
+                rotationX: -100,
+                transformOrigin: "50% top -250",
+                ease: Power1.easeInOut
+            }, 0.05);
+        }
+        if (tag == "ul"){
+            for (var p = 0; p < event.currentSlide.children[i].children.length ; p++){
+
+                var contentOpenData = $(event.currentSlide.children[i].children[p]);
+
+                tl.staggerFrom(contentOpenData, 0.75, {
+                    autoAlpha: 0,
+                    rotationX: -100,
+                    ease: Power1.easeInOut
+                }, 0.05);
+
+            }
+        }
+    }
 }, false);
 
+
+
+/*
+    tl.staggerFrom(contentOpenData, 0.75, {
+        autoAlpha: 0,
+        rotationX: -100,
+        transformOrigin: "50% top -250",
+        ease: Power1.easeInOut
+    }, 0.05);
+
+*/

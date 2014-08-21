@@ -30,12 +30,15 @@ Reveal.initialize({
 Reveal.addEventListener( 'ready', function( event ) {
    //selecciona el DIV donde va el SVG y le inyecta el icono
    
-   $(".labs").html(getIcon("labs"));
+   //$(".labs").html(getIcon("labs"));
    // animaSVG(".labs");
 
 }, false);
 
 Reveal.addEventListener('inicio', function(event) {
+
+
+    $(".labs").html("");
     var creative = $('#creative-content');
     var tl1 = new TimelineMax();
     tl1.to(creative, 0.4, { opacity: 1 });
@@ -44,6 +47,23 @@ Reveal.addEventListener('inicio', function(event) {
 }, false);
 
 Reveal.addEventListener('gobierno', function(event) {
+
+    $("#iconoAnimado").html(getIcon("labs"));
+    animaSVG("#iconoAnimado");
+
+
+
+
+    var iconoAnimado = $('#iconoAnimado');
+    var tl3 = new TimelineMax();
+
+    tl3.to(iconoAnimado, 1.5, {
+        scale: .35,
+        x: -520,
+        y: -210,
+        rotationY: 360,
+        ease: Expo.easeInOut
+    }, 0.5);
 
     var creative = $('#creative-content');
     var tl1 = new TimelineMax();

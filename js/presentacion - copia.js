@@ -10,6 +10,7 @@
 var posicion = $('#posicion');
 var numero = $('#numero');
 var leyenda = $("#leyenda");
+var iconoAnimado = $('#iconoAnimado');
 
 
 Reveal.initialize({

@@ -30,7 +30,6 @@
 		<style>
 		
 			.iconoSVG {
-				visibility: hidden;
 				width: 500px;
 				height: 550px;
 				position: absolute;
@@ -38,7 +37,6 @@
 				left: 50%;
 				margin-left: -225px;
 				margin-top: -225px;
-				border: 1px solid red;
 			}
 
 		</style>
@@ -46,7 +44,7 @@
 	</head>
 
 	<body>
-		<div class="iconoSVG labs"></div>
+		<div class="iconoSVG labs" id="iconoAnimado"></div>
 
 		<div id="creative-content"></div>
 
@@ -498,6 +496,7 @@
 		<script src="js/network.js"></script>
 		<script src="js/iconos.js"></script>
 		<script src="js/presentacion.js"></script>
+		
 		<script type="text/javascript" charset="utf-8">
 			var socket, valores, MINLight, MAXLight, maxLight, bkg;
 			socket = io.connect('//localhost:3000');

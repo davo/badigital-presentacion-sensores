@@ -28,9 +28,10 @@ Reveal.initialize({
 });
 
 Reveal.addEventListener( 'ready', function( event ) {
-    //selecciona el DIV donde va el SVG y le inyecta el icono
-   //$("#iconoSVG").html(getIcon("casa"));
-   //animaSVG("#iconoSVG");
+   //selecciona el DIV donde va el SVG y le inyecta el icono
+   
+   // $("#iconoSVG").html(getIcon("casa"));
+   // animaSVG("#iconoSVG");
 }, false);
 
 Reveal.addEventListener('inicio', function(event) {

@@ -11,12 +11,17 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+
+
 		<link rel="stylesheet" href="css/reveal.min.css">
 		<link rel="stylesheet" href="css/theme/microdancing.css">
+		<script src='http://localhost:3000/socket.io/socket.io.js' type="text/javascript" charset="utf-8"></script>
+
 		<script src='captura-osc/frontend/libs/jquery-1.11.1.min.js' type="text/javascript" charset="utf-8"></script>
 		<script src='captura-osc/frontend/libs/paper-full.js' type="text/javascript" charset="utf-8"></script>
 		<script src='lib/js/TweenMax.min.js' type="text/javascript" charset="utf-8"></script>
 		<script src='lib/js/SplitText.min.js' type="text/javascript" charset="utf-8"></script>
+		<script src='captura-osc/frontend/libs/d3.v3.min.js' type="text/javascript" charset="utf-8"></script>
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -487,5 +492,43 @@
 		<script src="js/network.js"></script>
 		<script src="js/iconos.js"></script>
 		<script src="js/presentacion.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			var socket, valores, MINLight, MAXLight, maxLight, bkg;
+			socket = io.connect('//localhost:3000');
+
+			valores = [0,0,0,0];
+			bkg = d3.select("body")
+
+			MINLight = 1;   // valor Minimo del sensor de luz
+			MAXLight = 500;  // valor Maximo del sensor de luz
+			maxLight = MAXLight;  // var: Maximo de escala normal de luz
+
+			// console.log(dataLight);
+
+			// oigo el mensaje del Arduino y cambio el valor del ángulo
+			socket.on('message', function (message) {
+			    valores[message[message.split(",")[0].length - 1]] = parseInt(message.split(",")[1]);
+			    
+
+			    if (maxLight < valores[3] ){
+			        maxLight = valores[3] ;
+			    } else {
+			        if (maxLight >= MAXLight) {
+			            maxLight--;
+			        }
+			    }
+
+			    colorScale = d3.scale.linear().domain([MINLight, maxLight]).range(["#2F004B", "#554B80", "#BFA1B4", "#E6CA94","#FFF288"]);
+
+			    // console.log(dataLight);
+
+			    bkg.datum(valores[3])
+			    .transition(1000)
+			    .style('background-color',function(d) { return colorScale(d); });
+
+
+
+			}); // end listener   
+		</script>
 	</body>
 </html>
